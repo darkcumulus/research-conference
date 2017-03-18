@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from confsite.base import BaseProfile
+from consite.base import BaseProfile
 from django.utils.text import slugify
 import datetime
 
