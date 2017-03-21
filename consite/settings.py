@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'conferences',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -124,5 +125,5 @@ STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets'), ]
 
 # Authentication 
-LOGIN_URL = 'employees:login'
-LOGIN_REDIRECT_URL = 'employees:dashboard'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'users:dashboard'

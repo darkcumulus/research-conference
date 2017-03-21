@@ -15,3 +15,5 @@ dist/
 *.sqlite3
 *.bat
 .idea/
+assets/fonts/
+assets/images/

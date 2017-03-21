@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Sign up| {{ block.super }} {% endblock %}
+
+{% block content %}
+	<section class="modal hero is-fullheight is-dark is-bold">
+	
+	    <div class="hero-body">
+	      <div class="container">
+	        <div class="columns is-vcentered">
+	          <div class="column is-4 is-offset-4">
+	            <h1 class="title">
+	              Register an Account
+	            </h1>
+	            <form method="post" action="{% url 'users:signup' %}">
+	            {% csrf_token %}
+		            <div class="box">
+		               {{form.username.errors}}
+		              <label class="label">{{form.username.label}}</label>
+		              <p class="control">
+		                <input class="input" name="{{form.username.name}}" type="text" placeholder="jsmith">
+		              </p>
+		               {{form.email.errors}}
+		              <label class="label">{{form.email.label}}</label>
+		              <p class="control">
+		                <input class="input" type="text" name="{{form.email.name}}" placeholder="jsmith@example.org">
+		              </p>
+		              <hr>
+
+
+		              <label class="label">Password</label>
+		              <p class="control">
+		                <input class="input" name="{{form.password1.name}}" type="password" placeholder="●●●●●●●">
+		              </p>
+		              <label class="label">Confirm Password</label>
+		              <p class="control">
+		                <input class="input" name="{{form.password2.name}}" type="password" placeholder="●●●●●●●">
+		              </p>
+		              	{% if form.errors %}
+							<div class="help is-danger">
+								<span>An Error has Occurred, User already exists?</span>
+							</div>
+					    {% endif %}	
+		              <hr>
+		              <p class="control">
+		                <input type="submit" class="button is-primary" value="Register">
+		                <input type="submit" class="button is-default" value="Cancel">
+		              </p>
+		            </div>
+	            </form>
+	            <p class="has-text-centered">
+	              <a href="{% url 'login' %}">Login</a>
+	              | 
+	              <a href="#">Need help?</a>
+	            </p>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </section>
+{% endblock %}
+
+
+
+

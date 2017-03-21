@@ -1,0 +1,48 @@
+
+#main-contents {
+    background-color: white;
+
+}
+
+
+#main > div > article > ul > li {
+    color: #ff4629;
+}
+
+#main>div>article {
+	font-size: 17px;
+	margin-left: 15px;
+	font-weight: bold;
+
+}
+
+.content>ul>li {
+    list-style: None;
+}
+
+.entry-thumbnail {
+    width: 17.80%;
+    float: left;
+
+}
+.entry-thumbnail-detail{
+    width: 30.80%;
+    float: left;
+
+}
+
+.sizeup {
+    font-size: 1.1em;
+}
+
+.justify-it {
+    text-align: justify;
+    text-justify:inter-word;
+}
+
+.marginalized > li {
+    line-height: 16px;
+    margin-bottom: 18px;
+    font-weight: bold;
+}
+

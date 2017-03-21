@@ -3,8 +3,7 @@
 {% block title %}Login | {{ block.super }} {% endblock %}
 
 {% block content %}
-	<section class="hero is-fullheight is-dark is-bold">
-	{% csrf_token %}
+	<section id="loginmodal" class="modal hero is-fullheight is-dark is-bold">
 	    <div class="hero-body">
 	      <div class="container">
 	        <div class="columns is-vcentered">
@@ -12,23 +11,32 @@
 	            <h1 class="title">
 	              Login
 	            </h1>
-	            <div class="box">
-	              <label class="label">Email</label>
-	              <p class="control">
-	                <input class="input" type="text" placeholder="jsmith@example.org">
-	              </p>
-	              <label class="label">Password</label>
-	              <p class="control">
-	                <input class="input" type="password" placeholder="●●●●●●●">
-	              </p>
-	              <hr>
-	              <p class="control">
-	                <button class="button is-primary">Login</button>
-	                <button class="button is-default">Cancel</button>
-	              </p>
-	            </div>
+	            <form method="post" action="{% url 'login' %}">
+	            	{% csrf_token %}
+		            <div class="box">
+		              <label class="label">{{ form.username.label}}</label>
+		              <p class="control">
+		                <input autofocus="" id="{{form.username.auto_id}}" name="{{form.username.name}}" class="input" type="text" placeholder="jsmith@example.org" required>
+		              </p>
+		              <label class="label">{{form.password.label}}</label>
+		              <p class="control">
+		                <input id="{{form.password.auto_id}}" name="{{form.password.name}}" class="input" type="password" placeholder="●●●●●●●" required>
+		              </p>
+						{% if form.errors %}
+							<div class="help is-danger">
+								<span>Your username and password didn't match. Please try again</span>
+							</div>
+						{% endif %}		              
+		              <hr>
+		              <input type="hidden" name="next" value="{% url 'home' %}" />
+		              <p class="control">
+		              	<input type="submit" class="button is-primary" value="Login">
+		              	<input type="submit" class="button is-default" value="Cancel">
+		              </p>
+		            </div>
+		        </form>
 	            <p class="has-text-centered">
-	              <a href="{% url 'signup' %}">Register an Account</a>
+	              <a href="{% url 'users:signup' %}">Register an Account</a>
 	              | 
 	              <a href="#">Forgot password</a>
 	              | 
@@ -38,8 +46,11 @@
 	        </div>
 	      </div>
 	    </div>
-	  </section>
+	  </section> 
 {% endblock %}
+
+
+
 
 
 
