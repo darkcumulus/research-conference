@@ -15,18 +15,26 @@
 	            <form method="post" action="{% url 'users:signup' %}">
 	            {% csrf_token %}
 		            <div class="box">
-		               {{form.username.errors}}
-		              <label class="label">{{form.username.label}}</label>
+		              <label class="label">{{form.first_name.label}}</label>
 		              <p class="control">
-		                <input class="input" name="{{form.username.name}}" type="text" placeholder="jsmith">
+		                <input class="input" name="{{form.first_name.name}}" type="text" placeholder="John">
 		              </p>
+		              <label class="label">{{form.last_name.label}}</label>
+		              <p class="control">
+		                <input class="input" name="{{form.last_name.name}}" type="text" placeholder="Smith">
+		              </p>
+
 		               {{form.email.errors}}
 		              <label class="label">{{form.email.label}}</label>
 		              <p class="control">
 		                <input class="input" type="text" name="{{form.email.name}}" placeholder="jsmith@example.org">
 		              </p>
 		              <hr>
-
+		               {{form.username.errors}}
+		              <label class="label">{{form.username.label}}</label>
+		              <p class="control">
+		                <input class="input" name="{{form.username.name}}" type="text" placeholder="jsmith">
+		              </p>
 
 		              <label class="label">Password</label>
 		              <p class="control">

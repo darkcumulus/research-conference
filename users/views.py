@@ -50,20 +50,23 @@ class SignUpView(generic.CreateView):
     # process form data
     def post(self, request):
         form = self.form_class(request.POST)
-        #import pdb; pdb.set_trace()
         if form.is_valid():
             user = form.save(commit = False)
 
             # cleaned (normalized) data
             username = form.cleaned_data['username']
+            firstname = form.cleaned_data['first_name']
+            lastname = form.cleaned_data['last_name']
             password1 = form.cleaned_data['password1']
             password2 = form.cleaned_data['password2']
 
             if password1 and password2 and password1 != password2:
                 raise forms.ValidationError(self.error_messages['password_mismatch'],
                     code='password_mismatch',
-                )
+                )                
             user.set_password(password2)
+            user.first_name = firstname 
+            user.last_name = lastname
             user.save()
 
             # returns User objects if credentials are correct 
