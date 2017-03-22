@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from consite.base import BaseProfile
-from django.utils.text import slugify
+from django.contrib.auth.models import User
 import datetime
 
 class Organizer(BaseProfile):
@@ -22,7 +22,6 @@ class Organizer(BaseProfile):
 class PendingManager(models.Manager):
 	def get_queryset(self):
 		return super(PendingManager,self).get_queryset().filter(start_date__gte=datetime.datetime.now())
-
 
 class Conference(BaseProfile):
 	LEVEL_CHOICES = (
@@ -54,3 +53,63 @@ class Conference(BaseProfile):
 		
 	def __str__(self):
 		return self.title
+
+	def get_organizers(self):
+		ret = ",".join([org.fullname for org in self.organizers.all()])
+		return ret
+
+class Author(BaseProfile):
+    GENDER_CHOICES = (
+        ('0', 'Unknown'),
+        ('1', 'male'),
+        ('2', 'female'),
+    )
+    firstname = models.CharField(max_length=30)
+    middlename = models.CharField(max_length=30, blank=True)
+    lastname = models.CharField(max_length=30)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=0)
+
+    class Meta:
+        ordering = ('lastname',)
+        unique_together = ('firstname', 'middlename', 'lastname', )
+
+    def __str__(self):
+        fullname = self.lastname + ', ' + self.firstname[0]+'.'
+        return fullname
+
+
+class Study(BaseProfile):
+    RESEARCH_TYPES = (
+        ('0', 'unknown'),
+        ('1', 'study'),
+        ('2', 'project'),
+    )
+
+    PRESENTATION_TYPES = (
+        ('0', 'unknown'),
+        ('1', 'oral'),
+        ('2', 'poster'),
+    )
+
+    title = models.CharField(max_length=256, verbose_name="Research Title", unique=True)
+    authors = models.ManyToManyField(Author, null=True, verbose_name="List of authors")
+    presentor = models.ForeignKey(Author, related_name="authors", blank=True, verbose_name="Presented by", null=True)
+    conference = models.ForeignKey(Conference, blank=True, verbose_name="Conference Title")
+    research_type = models.CharField(max_length=1, verbose_name="Type of Research", choices=RESEARCH_TYPES, default=0)
+    presentation_type = models.CharField(max_length=1, verbose_name="Type of Presentation", choices=PRESENTATION_TYPES,
+                                         default=0)
+    other_info = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ('title',)
+        unique_together = ('title', 'conference')
+        verbose_name_plural = 'Studies'
+
+    def get_authors(self):
+        ret = ",".join([str(author) for author in self.authors.all()])
+        return ret
+
+
+
+    def __str__(self):
+        return self.title

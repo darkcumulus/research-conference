@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block content %}
+<hr>
+<div class="container">
+	<section>
+        <div id="main" class="tile">
+            <div id="tags" class="tile is-parent is-3">
+                <article class="tile is-child">
+                    <ul class="sizeup marginalized">
+                        <li>Web Development</li>
+                        <li>Programming</li>
+                        <li>Databases</li>
+                        <li>Graphics & Design</li>
+                        <li>Operating Systems</li>
+                        <li>Networking & Cloud Computing</li>
+                        <li>Administration</li>
+                        <li>Certification</li>
+                    </ul>
+                </article>
+            </div>
+            <div class="tile is-parent is-9">
+                    <div class="tile is-child is-12">
+                      <div class="column is-paddingless is-marginless">
+                          <p class="title is-3">{{ object.title }}</p>
+                          <p class="subtitle is-5"><i>{{object.get_organizers}}</i></p>
+                          <hr>
+                      </div>
+                      <article class="columns">
+                        <div class="column">
+                          <figure class="image is-128by128">
+                            <img src="http://www.allitebooks.com/wp-content/uploads/2017/03/Django-Project-Blueprints-400x493.jpg">
+                          </figure>
+                        </div>
+                        <div class="column">
+                          <div class="content">
+                            <div class="columns is-mobile sizeup">
+                              <div class="column is-marginless">
+                                <p><strong>Venue :</strong></p>                               
+                                <p><strong>Level :</strong></p>                              
+                              	<p><strong>Conference Date :</strong></p>                      
+                                <p><strong>Registration Fee :</strong></p>
+
+                                  <p><strong>Abstract DL:</strong></p>
+                                <p><strong>Paper DL :</strong></p>
+                                <p><strong>Contact :</strong></p>
+                              </div>
+                              <div class="column is-marginless is-8">
+                                <p>{{object.venue}}</p>                              
+                                <p>{{object.get_level_display}}</p>
+                                <p>{{object.start_date}} - {{object.end_date}}</p>
+                                <p>P{{object.registration_fee}}</p>
+                                <p>{{conference.abstract_deadline|date}}</p>
+                                <p>{{conference.paper_deadline}}</p>
+                                <p>{{conference.contact_details}}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                      <hr>
+                      <article class="columns">
+                        <div class="column sizeup justify-it">
+                          <h2><strong>Abstract of the Study:</strong></h2>
+                            <p>
+                            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat quam laborum sit nostrum alias, cumque eius debitis veritatis, enim dolorem, necessitatibus est! Hic laborum quam, nobis aliquid quia, ea qui!</span><span>Tempore itaque nemo aliquid eos dolores, error saepe numquam quibusdam sed mollitia incidunt nulla maxime quam magnam distinctio repellat dignissimos quas pariatur maiores reprehenderit at officiis deserunt dolore, rem! Officia.</span>
+                            </p>
+                        </div>
+                      </article>
+                      <hr>
+                      <div class="columns ">
+                        <div class="column is-one-quarter">
+                          <a href="#" class="button is-danger">
+                          <span class="icon is-small">
+                          <i class="fa fa-download">
+                          </i></span><span>Download PDF (5.9 MB)</span></a>
+                        </div>
+                        <div class="column">
+                          <a href="#" class="button is-danger">
+                          <span class="icon is-small">
+                          <i class="fa fa-book">
+                          </i></span>
+                          <span>Read Online</span></a>
+                        </div>
+                      </div>
+                    <hr>
+                    <strong><p class="sizeup">Related Conferences</p></strong><br>
+                    <div class="columns">
+                      <div class="column">
+                          <figure class="image">
+                            <img src="http://www.allitebooks.com/wp-content/uploads/2017/03/Django-Project-Blueprints-400x493.jpg">
+                          </figure>
+                          <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
+                      </div>
+                      <div class="column">
+                          <figure class="image">
+                            <img src="http://www.allitebooks.com/wp-content/uploads/2017/03/Django-Project-Blueprints-400x493.jpg">
+                          </figure>
+                          <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
+                      </div>
+                      <div class="column">
+                          <figure class="image">
+                            <img src="http://www.allitebooks.com/wp-content/uploads/2017/03/Django-Project-Blueprints-400x493.jpg">
+                          </figure>
+                          <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
+                      </div>
+                      <div class="column">
+                          <figure class="image">
+                            <img src="http://www.allitebooks.com/wp-content/uploads/2017/03/Django-Project-Blueprints-400x493.jpg">
+                          </figure>
+                          <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
+                      </div>
+                    </div>
+                    <hr>
+
+                    <div class="field is-horizontal">
+                      <div class="field-label is-large">
+                        <label class="label sizeup">Comment</label>
+                      </div><br>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input is-large" type="text" placeholder="Insert Comment">
+                          </div>
+                          <div class="control">
+                            <button class="button is-primary">Send Message</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> <!--second main column -->
+
+            </div>            
+        </div>	
+
+    </section>
+</div> <!--container div -->
+
+{% endblock %}

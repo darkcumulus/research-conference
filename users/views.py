@@ -60,10 +60,12 @@ class SignUpView(generic.CreateView):
             password1 = form.cleaned_data['password1']
             password2 = form.cleaned_data['password2']
 
+            # confirm password
             if password1 and password2 and password1 != password2:
                 raise forms.ValidationError(self.error_messages['password_mismatch'],
                     code='password_mismatch',
                 )                
+                
             user.set_password(password2)
             user.first_name = firstname 
             user.last_name = lastname

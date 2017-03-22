@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import Conference, Organizer
+from .models import Conference, Organizer, Study, Author
+
+class AuthorAdmin(admin.ModelAdmin):
+	model = Author
+admin.site.register(Author, AuthorAdmin)
+
+class StudyAdmin(admin.ModelAdmin):
+	model = Study
+admin.site.register(Study, StudyAdmin)
 
 class OrganizerAdmin(admin.ModelAdmin):
 	model = Organizer 
