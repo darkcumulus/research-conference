@@ -19,6 +19,14 @@ class Organizer(BaseProfile):
 	def __str__(self):
 		return self.fullname
 
+	def get_absolute_url(self):
+		return reverse('organizer-detail', kwargs={'pk', self.pk})
+
+	def save(self, *args, **kwargs):
+		if (self.shortname is None):
+			self.shortname = "".join(word[0] for word in self.shortname.upper().split())
+		super(Organizer, self).save(*args, **kwargs)
+
 class PendingManager(models.Manager):
 	def get_queryset(self):
 		return super(PendingManager,self).get_queryset().filter(start_date__gte=datetime.datetime.now())
@@ -63,6 +71,9 @@ class Conference(BaseProfile):
 		ret = ",".join([org.fullname for org in self.organizers.all()])
 		return ret
 
+	def get_absolute_url(self):
+		return reverse('conference-detail', kwargs={'pk', self.pk})
+
 class Author(BaseProfile):
     GENDER_CHOICES = (
         ('0', 'Unknown'),
@@ -83,6 +94,8 @@ class Author(BaseProfile):
         return fullname
 
 	# def get_conferences(self):
+	def get_absolute_url(self):
+		return reverse('author-detail', kwargs={'pk', self.pk})
 		
 
 class Study(BaseProfile):
@@ -115,8 +128,6 @@ class Study(BaseProfile):
     def get_authors(self):
         ret = ",".join([str(author) for author in self.authors.all()])
         return ret
-
-
 
     def __str__(self):
         return self.title
