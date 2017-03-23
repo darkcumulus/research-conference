@@ -25,7 +25,7 @@ SECRET_KEY = 'cwzd8$#^3^w#2c%0@vq$$2=^@z3se)312%z67ls)^_1zhp(+8)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.2.150','rainforestpuppy']
 
 
 # Application definition
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'markdownify',
     'conferences',
     'users',
 ]
@@ -127,3 +129,19 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets'), ]
 # Authentication 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'users:dashboard'
+
+MARKDOWNIFY_WHITELIST_TAGS = [
+    'a',
+    'abbr',
+    'acronym',
+    'b',
+    'blockquote',
+    'em',
+    'i',
+    'li',
+    'ol',
+    'ul',
+    'p',
+    'strong',
+    'ul'
+]

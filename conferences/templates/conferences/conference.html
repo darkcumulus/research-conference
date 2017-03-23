@@ -1,21 +1,22 @@
 {% extends "base.html" %}
-
+{% load humanize %}
+{% load markdownify %}
 {% block content %}
 <hr>
 <div class="container">
 	<section>
         <div id="main" class="tile">
-            <div id="tags" class="tile is-parent is-3">
+            <div class="tile is-parent is-3">
                 <article class="tile is-child">
                     <ul class="sizeup marginalized">
-                        <li>Web Development</li>
-                        <li>Programming</li>
-                        <li>Databases</li>
+                        <li>Environment</li>
+                        <li>Business</li>
+                        <li>Computers</li>
                         <li>Graphics & Design</li>
                         <li>Operating Systems</li>
                         <li>Networking & Cloud Computing</li>
                         <li>Administration</li>
-                        <li>Certification</li>
+                        <li>Presentations</li>
                     </ul>
                 </article>
             </div>
@@ -23,47 +24,50 @@
                     <div class="tile is-child is-12">
                       <div class="column is-paddingless is-marginless">
                           <p class="title is-3">{{ object.title }}</p>
-                          <p class="subtitle is-5"><i>{{object.get_organizers}}</i></p>
+                          <p class="subtitle is-5"><i>{{object.get_organizers_long}}</i></p>
                           <hr>
                       </div>
                       <article class="columns">
                         <div class="column">
                           <figure class="image is-128by128">
-                            <img src="http://www.allitebooks.com/wp-content/uploads/2017/03/Django-Project-Blueprints-400x493.jpg">
+                            <img src="https://psuresearch.files.wordpress.com/2017/03/ignite.png?w=676">
                           </figure>
                         </div>
                         <div class="column">
                           <div class="content">
                             <div class="columns is-mobile sizeup">
                               <div class="column is-marginless">
-                                <p><strong>Venue :</strong></p>                               
-                                <p><strong>Level :</strong></p>                              
-                              	<p><strong>Conference Date :</strong></p>                      
-                                <p><strong>Registration Fee :</strong></p>
-
-                                  <p><strong>Abstract DL:</strong></p>
-                                <p><strong>Paper DL :</strong></p>
+  
+                                <p><strong>Venue :</strong></p>
+                                <p><strong>Level :</strong></p>
+                              	<p><strong>Event Date :</strong></p>
+                                <p><strong>Registration :</strong></p>
+                                <p><strong>Abstract (DL):</strong></p>
+                                <br>
+                                <p><strong>Paper (DL) :</strong></p>
+                                <br>
                                 <p><strong>Contact :</strong></p>
                               </div>
                               <div class="column is-marginless is-8">
-                                <p>{{object.venue}}</p>                              
+                                <p>{{object.venue}}</p>
                                 <p>{{object.get_level_display}}</p>
                                 <p>{{object.start_date}} - {{object.end_date}}</p>
-                                <p>P{{object.registration_fee}}</p>
-                                <p>{{conference.abstract_deadline|date}}</p>
-                                <p>{{conference.paper_deadline}}</p>
-                                <p>{{conference.contact_details}}</p>
+                                <p>P{{object.registration_fee|intcomma}}</p>
+                                <p>{{object.abstract_deadline}}<br>({{object.abstract_deadline|naturaltime}})</p>
+                              
+                                <p>{{object.paper_deadline}}<br>({{object.paper_deadline|naturaltime}})</p>
+                                <p>{{object.contact_details|linebreaks}}</p>
                               </div>
                             </div>
                           </div>
                         </div>
                       </article>
                       <hr>
-                      <article class="columns">
+                        <article class="columns">
                         <div class="column sizeup justify-it">
-                          <h2><strong>Abstract of the Study:</strong></h2>
+                          <h2><strong>Description of the Event:</strong></h2>
                             <p>
-                            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat quam laborum sit nostrum alias, cumque eius debitis veritatis, enim dolorem, necessitatibus est! Hic laborum quam, nobis aliquid quia, ea qui!</span><span>Tempore itaque nemo aliquid eos dolores, error saepe numquam quibusdam sed mollitia incidunt nulla maxime quam magnam distinctio repellat dignissimos quas pariatur maiores reprehenderit at officiis deserunt dolore, rem! Officia.</span>
+                            {{object.description|markdownify|safe}}
                             </p>
                         </div>
                       </article>
@@ -73,7 +77,7 @@
                           <a href="#" class="button is-danger">
                           <span class="icon is-small">
                           <i class="fa fa-download">
-                          </i></span><span>Download PDF (5.9 MB)</span></a>
+                          </i></span><span>Download Poster (5.9 MB)</span></a>
                         </div>
                         <div class="column">
                           <a href="#" class="button is-danger">

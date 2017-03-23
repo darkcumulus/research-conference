@@ -39,9 +39,10 @@ class Conference(BaseProfile):
 	poster  = models.FileField(upload_to='%Y/%m/%d/', help_text="Upload the PDF/DOCX Poster here (ZIP/RAR format)",blank=True)
 	start_date = models.DateField(default=timezone.localtime(timezone.now()) + datetime.timedelta(days=30), verbose_name="Date Started")
 	end_date = models.DateField(default=timezone.localtime(timezone.now()) + datetime.timedelta(days=32),verbose_name="Date Ended")
-	abstract_deadline = models.DateField(default=timezone.localtime(timezone.now()) + datetime.timedelta(days=15), verbose_name="Deadline of Abstract Submission")
-	paper_deadline = models.DateField(default=timezone.localtime(timezone.now()) + datetime.timedelta(days=20), verbose_name="Deadline of Paper Submission")
+	abstract_deadline = models.DateTimeField(default=timezone.localtime(timezone.now()) + datetime.timedelta(days=15),blank=True, verbose_name="Deadline of Abstract Submission")
+	paper_deadline = models.DateTimeField(default=timezone.localtime(timezone.now()) + datetime.timedelta(days=20),blank=True, verbose_name="Deadline of Paper Submission")
 	contact_details = models.TextField(max_length=256, blank=True)
+	description = models.TextField(max_length=512, blank=True)
 	
 	objects = models.Manager()
 	pending = PendingManager()
@@ -54,7 +55,11 @@ class Conference(BaseProfile):
 	def __str__(self):
 		return self.title
 
-	def get_organizers(self):
+	def get_organizers_short(self):
+		ret = ",".join([org.shortname for org in self.organizers.all()])
+		return ret 
+
+	def get_organizers_long(self, flag=True):
 		ret = ",".join([org.fullname for org in self.organizers.all()])
 		return ret
 
@@ -77,6 +82,8 @@ class Author(BaseProfile):
         fullname = self.lastname + ', ' + self.firstname[0]+'.'
         return fullname
 
+	# def get_conferences(self):
+		
 
 class Study(BaseProfile):
     RESEARCH_TYPES = (

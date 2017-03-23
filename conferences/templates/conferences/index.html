@@ -8,47 +8,52 @@
             <div id="tags" class="tile is-parent is-3">
                 <article class="tile is-child">
                     <ul class="sizeup marginalized">
-                        <li>Web Development</li>
-                        <li>Programming</li>
-                        <li>Databases</li>
+                        <li>Environment</li>
+                        <li>Business</li>
+                        <li>Computers</li>
                         <li>Graphics & Design</li>
                         <li>Operating Systems</li>
                         <li>Networking & Cloud Computing</li>
                         <li>Administration</li>
-                        <li>Certification</li>
+                        <li>Presentations</li>
                     </ul>
                 </article>
             </div>
             <div class="tile is-parent is-9">
                 <div class="content">
+                    <h1 class="title">Latest</h1>
+                    <hr class="is-marginless is-paddingless">
                     <ul>
                         
                         {% for conference in conferences  %}
                         <li>
                             <div class="columns">
-                                <div class="column">
+                                <div class="column is-2">
                                     <div class="image">
                                         <img src="http://www.allitebooks.com/wp-content/uploads/2017/03/Django-Project-Blueprints-400x493.jpg">
                                     </div>                                    
                                 </div>
                                 <div class="column is-10">
                                     <div class="entry-body">
-                                        <p class="title is-4">
+                                        <p class="title is-5 ">
                                             <a href="{{conference.get_absolute_url}}{{conference.id}}">{{conference.title}}</a>
                                         </p>
-                                        <p class="subtitle is-6"><strong>type: </strong>if its something you know, it aint worth it</p>
+                                                                      
+                                        <p class="subtitle is-6 is-marginless"><strong>Venue</strong>: {{conference.venue}}</p>
 
-                                        <p class="subtitle is-6">{{conference.start_date}}-{{conference.end_date}}</p>
-                                        <p>
+                                        <p class="subtitle is-6 "><strong>Event Date</strong>: {{conference.start_date}}-{{conference.end_date}}</p>
+
+                                        <p >
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam similique, dolores. Repellat, maiores architecto ipsum optio quam dolore nostrum sapiente qui minima et cupiditate enim laudantium veniam, temporibus commodi accusantium.
                                         </p>
 
                                     </div>
                                 </div>
                             </div>
+                            <hr>
                         </li>
                         {% endfor %}
-                        <hr>
+                    
                     </ul>
                 </div>
             </div>
