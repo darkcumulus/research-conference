@@ -21,10 +21,28 @@
             </div>
             <div class="tile is-parent is-9">
                 <div class="content">
-                    <h1 class="title">Latest</h1>
-                    <hr class="is-marginless is-paddingless">
+                    <div class="columns">
+                        <div class="column is-4">
+                            <h1 class="title">Latest</h1>
+                        </div>
+                        <div class="column is-5">
+                              <p class="subtitle is-5 is-pulled-right" style="padding-right:0px;">
+                                <strong>123</strong> posts
+                              </p>
+                        </div>
+                        <div class="column is-3">
+                            <form method='GET' action=''>
+                                <p class="control has-addons">                                
+                                  <input class="input" name='q' type="text" value="{{request.GET.q}}" placeholder="Find a post">
+                                  <button class="button">
+                                    Search
+                                  </button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>                 
+                    <hr>                    
                     <ul>
-                        
                         {% for conference in conferences  %}
                         <li>
                             <div class="columns">
@@ -44,7 +62,7 @@
                                         <p class="subtitle is-6 "><strong>Event Date</strong>: {{conference.start_date}}-{{conference.end_date}}</p>
 
                                         <p >
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam similique, dolores. Repellat, maiores architecto ipsum optio quam dolore nostrum sapiente qui minima et cupiditate enim laudantium veniam, temporibus commodi accusantium.
+                                            {{conference.description}}
                                         </p>
 
                                     </div>
@@ -55,6 +73,23 @@
                         {% endfor %}
                     
                     </ul>
+                    {% if is_paginated %}
+                    <nav id="pagination-setting" class="pagination">
+                        <span class="page-current is-pulled-left">
+                             Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}.
+                        </span>
+                        <span class="page-links">
+                            {% if page_obj.has_previous %}
+                                <a class="pagination-previous" href="/conferences?page={{ page_obj.previous_page_number }}">previous</a>
+                            {% endif %}
+                            {% if page_obj.has_next %}
+                                <a class="pagination-next" href="/conferences?page={{ page_obj.next_page_number }}">next</a>
+                            {% endif %}
+
+                        </span>
+
+                    </nav>                   
+                    {% endif %}
                 </div>
             </div>
         </div>
