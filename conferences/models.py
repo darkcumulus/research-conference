@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from consite.base import BaseProfile
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 import datetime
 
 class Organizer(BaseProfile):
@@ -42,7 +43,7 @@ class Conference(BaseProfile):
 	title = models.TextField(max_length=256, help_text='Enter conference name')
 	level = models.CharField(max_length=1, choices=LEVEL_CHOICES, default=0, help_text="What type of Conference is this?")
 	registration_fee = models.DecimalField(max_digits=8, decimal_places=2, blank=True, help_text="Enter the Registration Fee")
-	organizers = models.ManyToManyField(Organizer, null=True, verbose_name='List of Organizers')
+	organizers = models.ManyToManyField(Organizer, verbose_name='List of Organizers')
 	venue = models.CharField(max_length=256, blank=True, help_text='Location of the event')
 	poster  = models.FileField(upload_to='%Y/%m/%d/', help_text="Upload the PDF/DOCX Poster here (ZIP/RAR format)",blank=True)
 	start_date = models.DateField(default=timezone.localtime(timezone.now()) + datetime.timedelta(days=30), verbose_name="Date Started")
@@ -71,9 +72,6 @@ class Conference(BaseProfile):
 		ret = ",".join([org.fullname for org in self.organizers.all()])
 		return ret
 
-	def get_absolute_url(self):
-		return reverse('conference-detail', kwargs={'pk', self.pk})
-
 class Author(BaseProfile):
     GENDER_CHOICES = (
         ('0', 'Unknown'),
@@ -94,9 +92,8 @@ class Author(BaseProfile):
         return fullname
 
 	# def get_conferences(self):
-	def get_absolute_url(self):
-		return reverse('author-detail', kwargs={'pk', self.pk})
-		
+    def get_absolute_url(self):
+        return reverse('author-detail', kwargs={'pk', self.pk})
 
 class Study(BaseProfile):
     RESEARCH_TYPES = (
@@ -112,7 +109,7 @@ class Study(BaseProfile):
     )
 
     title = models.CharField(max_length=256, verbose_name="Research Title", unique=True)
-    authors = models.ManyToManyField(Author, null=True, verbose_name="List of authors")
+    authors = models.ManyToManyField(Author, verbose_name="List of authors")
     presentor = models.ForeignKey(Author, related_name="authors", blank=True, verbose_name="Presented by", null=True)
     conference = models.ForeignKey(Conference, blank=True, verbose_name="Conference Title")
     research_type = models.CharField(max_length=1, verbose_name="Type of Research", choices=RESEARCH_TYPES, default=0)

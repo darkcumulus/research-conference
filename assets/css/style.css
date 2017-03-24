@@ -4,7 +4,6 @@
 
 }
 
-
 #main > div > article > ul > li {
     color: #ff4629;
 }
@@ -46,3 +45,10 @@
     font-weight: bold;
 }
 
+#pagination-setting {
+    margin-left: 25px ;
+}
+
+footer {
+    background-color: white !important;
+}

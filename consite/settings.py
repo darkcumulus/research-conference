@@ -25,7 +25,7 @@ SECRET_KEY = 'cwzd8$#^3^w#2c%0@vq$$2=^@z3se)312%z67ls)^_1zhp(+8)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.2.150','rainforestpuppy']
+ALLOWED_HOSTS = []
 
 
 # Application definition

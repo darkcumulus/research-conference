@@ -24,7 +24,7 @@ from conferences import urls as conference_urls
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls, name='admin-home'),
     url(r'^users/', include(user_urls, namespace='users')),
     url(r'^logout/$', auth_views.logout, {'next_page': 'home'},name='logout'),  
     url(r'^login/$', auth_views.login, {'template_name' :'registration/login.html'}, name='login'),	
