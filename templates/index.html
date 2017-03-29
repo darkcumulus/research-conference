@@ -1,13 +1,30 @@
 {% extends "base.html" %}
-
 {% block content %}
-<hr>
-<div class="container">
-
-		<section>
-            <h1>Landing Page Here</h1>
-        </section>
-</div> <!--container div -->
-
-
+<section class="hero is-fullheight is-default is-bold">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="columns is-vcentered">
+          <div class="column is-5">
+            <figure class="image is-4by3">
+              <img src="https://unsplash.it/800/600/?random" alt="Description">
+            </figure>
+          </div>
+          <div class="column is-6 is-offset-1">
+            <h1 class="title is-2">
+            Research Conferences 
+            </h1>
+            <h2 class="subtitle is-4">
+              URO Suggested Research related activities
+            </h2>
+            <br>
+            <p class="has-text-centered">
+              <a class="button is-large" href="/conferences/">
+                See conferences
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+ </section>
 {% endblock %}

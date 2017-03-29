@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
 
 
 from users import urls as user_urls
@@ -29,5 +29,6 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'next_page': 'home'},name='logout'),  
     url(r'^login/$', auth_views.login, {'template_name' :'registration/login.html'}, name='login'),	
     url(r'^conferences/', include(conference_urls, namespace='conf')),
-    url(r'^$', RedirectView.as_view(url='/conferences/'), name='home'),
+    # url(r'^$', RedirectView.as_view(url='/conferences/'), name='home'),
+    url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
 ]
