@@ -25,7 +25,7 @@ SECRET_KEY = 'cwzd8$#^3^w#2c%0@vq$$2=^@z3se)312%z67ls)^_1zhp(+8)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['7f9c6372.ngrok.io', 'localhost']
 
 
 # Application definition
@@ -123,6 +123,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
+#import pdb; pdb.set_trace()
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets'), ]
 

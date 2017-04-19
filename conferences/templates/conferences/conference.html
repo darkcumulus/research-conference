@@ -2,6 +2,7 @@
 {% load humanize %}
 {% load markdownify %}
 {% block content %}
+{% load staticfiles %}
 <hr>
 <div class="container">
 	<section>
@@ -30,14 +31,17 @@
                       <article class="columns">
                         <div class="column">
                           <figure class="image is-128by128">
-                            <img src="https://psuresearch.files.wordpress.com/2017/03/ignite.png?w=676">
+                            {% if object.poster_image.url != None %}
+                              <img src="{{object.poster_image.url}}">
+                            {% else %}
+                              <img src="{% static "images/photo_not_available.jpg" %}" alt="not available">
+                            {% endif %}
                           </figure>
                         </div>
                         <div class="column">
                           <div class="content">
                             <div class="columns is-mobile sizeup">
                               <div class="column is-marginless">
-  
                                 <p><strong>Venue :</strong></p>
                                 <p><strong>Level :</strong></p>
                               	<p><strong>Event Date :</strong></p>
@@ -92,25 +96,25 @@
                     <div class="columns">
                       <div class="column">
                           <figure class="image">
-                            <img src="http://www.allitebooks.com/wp-content/uploads/2017/03/Django-Project-Blueprints-400x493.jpg">
+                            <img src="https://unsplash.it/800/600/?random">
                           </figure>
                           <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
                       </div>
                       <div class="column">
                           <figure class="image">
-                            <img src="http://www.allitebooks.com/wp-content/uploads/2017/03/Django-Project-Blueprints-400x493.jpg">
+                            <img src="https://unsplash.it/800/600/?random">
                           </figure>
                           <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
                       </div>
                       <div class="column">
                           <figure class="image">
-                            <img src="http://www.allitebooks.com/wp-content/uploads/2017/03/Django-Project-Blueprints-400x493.jpg">
+                            <img src="https://unsplash.it/800/600/?random">
                           </figure>
                           <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
                       </div>
                       <div class="column">
                           <figure class="image">
-                            <img src="http://www.allitebooks.com/wp-content/uploads/2017/03/Django-Project-Blueprints-400x493.jpg">
+                            <img src="https://unsplash.it/800/600/?random">
                           </figure>
                           <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
                       </div>

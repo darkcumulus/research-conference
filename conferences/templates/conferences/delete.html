@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<hr>
+<div class="container">
+        <section>
+        <div id="main" class="tile">
+            <div id="tags" class="tile is-parent is-3">
+                <article class="tile is-child">
+                    <ul class="sizeup marginalized">
+                        <li>Environment</li>
+                        <li>Business</li>
+                        <li>Computers</li>
+                        <li>Graphics & Design</li>
+                        <li>Operating Systems</li>
+                        <li>Networking & Cloud Computing</li>
+                        <li>Administration</li>
+                        <li>Presentations</li>
+                    </ul>
+                </article>
+            </div>
+            <div class="tile is-parent is-9">
+                <form method="post"> {% csrf_token %}
+                Are you sure you want to delete "{{ object }}" ?
+                <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+        </section>
+</div> <!--container div -->
+
+{% endblock %}

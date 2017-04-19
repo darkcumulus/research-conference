@@ -41,11 +41,12 @@ class Conference(BaseProfile):
 		('4', 'international'),
 	)
 	title = models.TextField(max_length=256, help_text='Enter conference name')
+	poster_image = models.FileField(null=True, blank=True)
 	level = models.CharField(max_length=1, choices=LEVEL_CHOICES, default=0, help_text="What type of Conference is this?")
 	registration_fee = models.DecimalField(max_digits=8, decimal_places=2, blank=True, help_text="Enter the Registration Fee")
 	organizers = models.ManyToManyField(Organizer, verbose_name='List of Organizers')
 	venue = models.CharField(max_length=256, blank=True, help_text='Location of the event')
-	poster  = models.FileField(upload_to='%Y/%m/%d/', help_text="Upload the PDF/DOCX Poster here (ZIP/RAR format)",blank=True)
+	poster_file_url  = models.URLField(help_text="Put the URL of the PDF/DOCX Poster here (usually google drive URL)",blank=True)
 	start_date = models.DateField(default=timezone.localtime(timezone.now()) + datetime.timedelta(days=30), verbose_name="Date Started")
 	end_date = models.DateField(default=timezone.localtime(timezone.now()) + datetime.timedelta(days=32),verbose_name="Date Ended")
 	abstract_deadline = models.DateTimeField(default=timezone.localtime(timezone.now()) + datetime.timedelta(days=15),blank=True, verbose_name="Deadline of Abstract Submission")

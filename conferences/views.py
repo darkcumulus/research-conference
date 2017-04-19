@@ -1,6 +1,9 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.db.models import Q
+from django.http import Http404
 
 from .models import Conference
 import datetime
@@ -38,3 +41,66 @@ class ConferenceList(ListView):
 class ConferenceDetail(DetailView):
 	model = Conference 
 	template_name = 'conferences/conference.html'
+
+
+class ConferenceCreate(LoginRequiredMixin, CreateView):
+	# tell that youre happy
+	model = Conference
+	fields = (
+			'title',
+			'poster_image',
+			'level',
+			'registration_fee',
+			'organizers',
+			'venue',
+			'poster_file_url',
+			'start_date',
+			'end_date',
+			'abstract_deadline',
+			'paper_deadline',
+			'contact_details',
+			'description',
+	)	
+	template_name = 'conferences/create.html'
+	success_url = 'conferences/index.html'
+
+class ConferenceUpdate(LoginRequiredMixin, UpdateView):
+	model = Conference 
+	fields = (
+			'title',
+			'poster_image',
+			'level',
+			'registration_fee',
+			'organizers',
+			'venue',
+			'poster_file_url',
+			'start_date',
+			'end_date',
+			'abstract_deadline',
+			'paper_deadline',
+			'contact_details',
+			'description',
+	)
+	template_name = 'conferences/update.html'
+	success_url = 'conferences/index.html'
+
+	def get_object(self, queryset=None):
+		obj = super(ConferenceUpdate, self).get_object()
+		if not obj.owner == self.request.user:
+			raise Http404
+		return obj
+
+class ConferenceDelete(LoginRequiredMixin, DeleteView):
+	model = Conference 
+	template_name = 'conferences/delete.html'
+	success_url = 'conferences/index.html'
+
+	def get_object(self, queryset=None):
+		obj = super(ConferenceDelete, self).get_object()
+		if not obj.owner == self.request.user:
+			raise Http404
+		return obj
+
+
+class HomeView(TemplateView):
+	template_name = "index.html"
