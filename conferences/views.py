@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.db.models import Q
 from django.http import Http404
 
+
 from .models import Conference
 import datetime
 
@@ -41,6 +42,24 @@ class ConferenceList(ListView):
 class ConferenceDetail(DetailView):
 	model = Conference 
 	template_name = 'conferences/conference.html'
+
+	def get_context_data(self, **kwargs):
+		import re
+		context = super(ConferenceDetail, self).get_context_data(**kwargs)
+		url = context['conference'].poster_file_url
+			
+		if url != None:
+			try:
+				#find an alphanumeric string having 28 chars in URL
+				found = re.search('([a-zA-Z0-9]{28})',url)
+			except AttributeError:
+				#if not found then provide empty link
+				found = '#'
+			url = 'https://drive.google.com/uc?export=download&id='+found.group(1)
+		# import pdb; pdb.set_trace()	
+		context['download_url'] = url 
+		return context
+
 
 
 class ConferenceCreate(LoginRequiredMixin, CreateView):
