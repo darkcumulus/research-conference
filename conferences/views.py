@@ -52,10 +52,12 @@ class ConferenceDetail(DetailView):
 			try:
 				#find an alphanumeric string having 28 chars in URL
 				found = re.search('([a-zA-Z0-9]{28})',url)
+				url = 'https://drive.google.com/uc?export=download&id='+found.group(1)
 			except AttributeError:
 				#if not found then provide empty link
-				found = '#'
-			url = 'https://drive.google.com/uc?export=download&id='+found.group(1)
+				found = ''
+		else:
+			url = '#'
 		# import pdb; pdb.set_trace()	
 		context['download_url'] = url 
 		return context
