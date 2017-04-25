@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 import datetime
 
+import tagulous.models
+
 class Organizer(BaseProfile):
 	fullname = models.TextField(max_length=256, unique=True)
 	shortname = models.CharField(max_length=10, blank=True, help_text='Shortname')
@@ -32,6 +34,18 @@ class PendingManager(models.Manager):
 	def get_queryset(self):
 		return super(PendingManager,self).get_queryset().filter(start_date__gte=datetime.datetime.now())
 
+class Keyword(tagulous.models.TagTreeModel):
+	class TagMeta:
+		initial = [
+			'Community/Resilience',
+			'Community/Technology',
+			'Public/Speaking',
+			'Computers',
+			'Livelihood-Programs',
+		]
+		space_delimiter = False 
+		autocomplete_view = 'conference_keywords_autocomplete'
+
 class Conference(BaseProfile):
 	LEVEL_CHOICES = (
 		('0', 'unknown'),
@@ -52,6 +66,9 @@ class Conference(BaseProfile):
 	abstract_deadline = models.DateTimeField(default=timezone.localtime(timezone.now()) + datetime.timedelta(days=15),blank=True, verbose_name="Deadline of Abstract Submission")
 	paper_deadline = models.DateTimeField(default=timezone.localtime(timezone.now()) + datetime.timedelta(days=20),blank=True, verbose_name="Deadline of Paper Submission")
 	contact_details = models.TextField(max_length=256, blank=True)
+	keywords = tagulous.models.TagField(
+		Keyword, help_text='Enter keywords about the conference'
+	)
 	description = models.TextField(max_length=512, blank=True)
 	
 	objects = models.Manager()

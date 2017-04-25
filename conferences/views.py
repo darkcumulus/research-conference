@@ -43,11 +43,8 @@ class ConferenceDetail(DetailView):
 	model = Conference 
 	template_name = 'conferences/conference.html'
 
-	def get_context_data(self, **kwargs):
-		import re
-		context = super(ConferenceDetail, self).get_context_data(**kwargs)
-		url = context['conference'].poster_file_url
-			
+	def get_gdrive_poster_link(self, url):
+		import re		
 		if url != None:
 			try:
 				#find an alphanumeric string having 28 chars in URL
@@ -59,7 +56,14 @@ class ConferenceDetail(DetailView):
 		else:
 			url = '#'
 		# import pdb; pdb.set_trace()	
-		context['download_url'] = url 
+		return url
+
+
+	def get_context_data(self, **kwargs):
+		context = super(ConferenceDetail, self).get_context_data(**kwargs)
+		url = context['conference'].poster_file_url
+		# import pdb; pdb.set_trace()	
+		context['download_url'] = self.get_gdrive_poster_link(url)
 		return context
 
 

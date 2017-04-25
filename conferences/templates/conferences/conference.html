@@ -50,7 +50,7 @@
                                 <br>
                                 <p><strong>Paper (DL) :</strong></p>
                                 <br>
-                                <p><strong>Contact :</strong></p>
+                                <p></i><strong>Contact :</strong></p>
                               </div>
                               <div class="column is-marginless is-8">
                                 <p>{{object.venue}}</p>
@@ -60,7 +60,9 @@
                                 <p>{{object.abstract_deadline}}<br>({{object.abstract_deadline|naturaltime}})</p>
                               
                                 <p>{{object.paper_deadline}}<br>({{object.paper_deadline|naturaltime}})</p>
-                                <p>{{object.contact_details|linebreaks}}</p>
+
+                                <p>{{object.contact_details|linebreaks}}</p>                               
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -69,9 +71,16 @@
                       <hr>
                         <article class="columns">
                         <div class="column sizeup justify-it">
-                          <h2><strong>Description of the Event:</strong></h2>
+                            <p> 
+                              <strong>Description of the event</strong>:
+                            </p>
                             <p>
-                            {{object.description|markdownify|safe}}
+                              {{object.description|markdownify|safe}}
+                            </p>
+                            <br>
+                            <p>
+                              <i class="fa fa-folder-open fa-1"></i>
+                              <strong>Keywords</strong>: {{object.keywords}}
                             </p>
                         </div>
                       </article>

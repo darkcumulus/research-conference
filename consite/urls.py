@@ -24,10 +24,17 @@ from django.views.generic import RedirectView, TemplateView
 from users import urls as user_urls
 from conferences import urls as conference_urls
 
-
+import tagulous.views 
+from conferences import models 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls, name='admin-home'),
+    url(
+        r'^api/keywords/$',
+        tagulous.views.autocomplete,
+        {'tag_model': models.Keyword},
+        name='conference_keywords_autocomplete',
+    ),    
     url(r'^users/', include(user_urls, namespace='users')),
     url(r'^logout/$', auth_views.logout, {'next_page': 'home'},name='logout'),  
     url(r'^login/$', auth_views.login, {'template_name' :'registration/login.html'}, name='login'),	

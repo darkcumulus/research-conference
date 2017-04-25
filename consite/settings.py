@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'markdownify',
     'conferences',
     'users',
+    'tagulous',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,10 @@ MARKDOWNIFY_WHITELIST_TAGS = [
     'strong',
     'ul'
 ]
+
+SERIALIZATION_MODULES = {
+    'xml':    'tagulous.serializers.xml_serializer',
+    'json':   'tagulous.serializers.json',
+    'python': 'tagulous.serializers.python',
+    'yaml':   'tagulous.serializers.pyyaml',
+}
