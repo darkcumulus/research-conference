@@ -19,13 +19,15 @@ class ConferenceList(ListView):
 	
 	def get_queryset(self):
 		# return Conference.objects.filter(start_date__gte=datetime.datetime.now()).order_by('start_date')
-		query = self.request.GET.get("q")	
+		query = self.request.GET.get("q")
+		# import pdb; pdb.set_trace()
 		if query:
 			return Conference.objects.filter(
 				Q(title__icontains=query) |
 				Q(venue__icontains=query) |
 				Q(contact_details__icontains=query) |
-				Q(description__icontains=query) 
+				Q(description__icontains=query) |
+				Q(keywords__slug__icontains=query)
 				).order_by('-start_date')
 		return Conference.objects.all().order_by('-start_date')
 		
@@ -37,7 +39,6 @@ class ConferenceList(ListView):
 	# 	context = super(ConferenceList, self).get_context_data(**kwargs)
 	# 	# Get the blog from id and add it to the context
 	# 	return context
-
 
 class ConferenceDetail(DetailView):
 	model = Conference 
@@ -58,10 +59,9 @@ class ConferenceDetail(DetailView):
 		# import pdb; pdb.set_trace()	
 		return url
 
-
 	def get_context_data(self, **kwargs):
 		context = super(ConferenceDetail, self).get_context_data(**kwargs)
-		url = context['conference'].poster_file_url
+		url = context['conference'].poster_file_url		
 		# import pdb; pdb.set_trace()	
 		context['download_url'] = self.get_gdrive_poster_link(url)
 		return context

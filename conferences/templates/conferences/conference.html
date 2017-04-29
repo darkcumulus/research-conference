@@ -127,7 +127,10 @@
                             <br>
                             <p>
                               <i class="fa fa-folder-open fa-1"></i>
-                              <strong>Keywords</strong>: {{object.keywords}}
+                              <strong>Keywords</strong>: 
+                              {% for k in object.keywords.values %}
+                                  <a href="{% url 'conf:conference-list' %}?q={{k.slug}}">{{k.slug}}</a>
+                              {% endfor %}
                             </p>                    
                     <hr>
 
