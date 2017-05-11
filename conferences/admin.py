@@ -1,9 +1,15 @@
 from django.contrib import admin
-from .models import Conference, Organizer, Study, Author
+from .models import Conference, Organizer, Study, Author, Category
 
 import tagulous.admin 
 from conferences import models 
 
+class CategoryAdmin(admin.ModelAdmin):
+	list_display = ('name', 'created', 'updated')
+	search_fields = ('name',)
+	prepopulated_fields = {'slug':('name',)}
+
+admin.site.register(Category, CategoryAdmin)
 
 class AuthorAdmin(admin.ModelAdmin):
 	model = Author

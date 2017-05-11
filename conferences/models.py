@@ -3,6 +3,7 @@ from django.utils import timezone
 from consite.base import BaseProfile
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.template.defaultfilters import slugify
 import datetime
 
 import tagulous.models
@@ -34,6 +35,26 @@ class PendingManager(models.Manager):
 	def get_queryset(self):
 		return super(PendingManager,self).get_queryset().filter(start_date__gte=datetime.datetime.now())
 
+class Category(BaseProfile):
+	name = models.CharField(max_length=100)
+	slug = models.SlugField(null=True, blank=True)
+	description = models.TextField(blank=True)
+
+
+	def save(self, *args, **kwargs):
+		if not self.id:
+			# import pdb; pdb.set_trace()
+			self.slug = slugify(self.name)
+		super(Category,self).save(*args, **kwargs)
+
+	class Meta:
+		ordering = ('name',)
+		verbose_name_plural = 'Categories'
+
+	def __str__(self):
+		return self.name
+
+
 class Keyword(tagulous.models.TagTreeModel):
 	class TagMeta:
 		initial = [
@@ -59,6 +80,7 @@ class Conference(BaseProfile):
 	level = models.CharField(max_length=1, choices=LEVEL_CHOICES, default=0, help_text="What type of Conference is this?")
 	registration_fee = models.DecimalField(max_digits=8, decimal_places=2, blank=True, help_text="Enter the Registration Fee")
 	organizers = models.ManyToManyField(Organizer, verbose_name='List of Organizers')
+	categories = models.ManyToManyField(Category, null=True, verbose_name='Categories Belong to')
 	venue = models.CharField(max_length=256, blank=True, help_text='Location of the event')
 	poster_file_url  = models.URLField(help_text="Put the URL of the PDF/DOCX Poster here (usually google drive URL)",blank=True)
 	start_date = models.DateField(default=timezone.localtime(timezone.now()) + datetime.timedelta(days=30), verbose_name="Date Started")

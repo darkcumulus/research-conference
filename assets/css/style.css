@@ -49,7 +49,10 @@
     margin-left: 25px ;
 }
 
+#sidetext{
+    color:#ff4629 !important;
 
+}
 footer {
     background-color: white !important;
 }

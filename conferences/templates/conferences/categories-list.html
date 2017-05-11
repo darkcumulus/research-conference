@@ -1,0 +1,9 @@
+<div id="tags" class="tile is-parent is-3">
+    <article class="tile is-child">
+        <ul id="sidetext" class="sizeup marginalized">
+         {% for c in object.cats %}
+         	<li><a href="#" style="color:#ff4629">{{c.name}}</a></li>
+         {% endfor %}
+        </ul>
+    </article>
+</div>

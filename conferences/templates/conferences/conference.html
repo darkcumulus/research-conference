@@ -1,26 +1,8 @@
-{% extends "base.html" %}
+{% extends "main.html" %}
 {% load humanize %}
 {% load markdownify %}
-{% block content %}
-{% load staticfiles %}
-<hr>
-<div class="container">
-	<section>
-        <div id="main" class="tile">
-            <div class="tile is-parent is-3">
-                <article class="tile is-child">
-                    <ul class="sizeup marginalized">
-                        <li>Environment</li>
-                        <li>Business</li>
-                        <li>Computers</li>
-                        <li>Graphics & Design</li>
-                        <li>Operating Systems</li>
-                        <li>Networking & Cloud Computing</li>
-                        <li>Administration</li>
-                        <li>Presentations</li>
-                    </ul>
-                </article>
-            </div>
+{% load staticfiles%}
+{% block rightside %}
             <div class="tile is-parent is-9">
                     <div class="tile is-child is-12">
                       <div class="column is-paddingless is-marginless">
@@ -83,7 +65,7 @@
                       <hr>
                       <div class="columns ">
                         <div class="column is-one-quarter">
-                          <a href="{{download_url}}" class="button is-danger">
+                          <a href="{{object.download_url}}" class="button is-danger">
                           <span class="icon is-small">
                           <i class="fa fa-download">
                           </i></span><span>Download Poster here</span></a>
@@ -129,7 +111,7 @@
                               <i class="fa fa-folder-open fa-1"></i>
                               <strong>Keywords</strong>: 
                               {% for k in object.keywords.values %}
-                                  <a href="{% url 'conf:conference-list' %}?q={{k.slug}}">{{k.slug}}</a>
+                                  <a href="{% url 'conf:conference-list' %}?q={{k.slug}}">#{{k.slug}}</a>
                               {% endfor %}
                             </p>                    
                     <hr>
@@ -152,9 +134,4 @@
                   </div> <!--second main column -->
 
             </div>            
-        </div>	
-
-    </section>
-</div> <!--container div -->
-
 {% endblock %}

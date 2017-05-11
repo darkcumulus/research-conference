@@ -5,9 +5,19 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.db.models import Q
 from django.http import Http404
 
+from django import template 
 
-from .models import Conference
+
+from .models import Conference, Category
 import datetime
+
+register = template.Library()
+
+@register.inclusion_tag('conferences/categories-list.html')
+def display_cat():
+	allcategories = Category.objects.all()
+	return {'allcategories':allcategories}
+
 
 class ConferenceList(ListView):
 	model = Conference
@@ -34,11 +44,11 @@ class ConferenceList(ListView):
 
 	# uncomment below, if you want to modify, template data
 
-	# def get_context_data(self, **kwargs):
-	# 	# Call the base implementation first to get a context
-	# 	context = super(ConferenceList, self).get_context_data(**kwargs)
-	# 	# Get the blog from id and add it to the context
-	# 	return context
+	def get_context_data(self, **kwargs):
+		context = super(ConferenceList, self).get_context_data(**kwargs)
+		# import pdb; pdb.set_trace()	
+		context['object'] = {'cats':Category.objects.all()}
+		return context
 
 class ConferenceDetail(DetailView):
 	model = Conference 
@@ -61,9 +71,13 @@ class ConferenceDetail(DetailView):
 
 	def get_context_data(self, **kwargs):
 		context = super(ConferenceDetail, self).get_context_data(**kwargs)
-		url = context['conference'].poster_file_url		
 		# import pdb; pdb.set_trace()	
-		context['download_url'] = self.get_gdrive_poster_link(url)
+		url = context['conference'].poster_file_url		
+
+		context['object'].download_url = self.get_gdrive_poster_link(url)
+		context['object'].cats= Category.objects.all()
+
+		# import pdb; pdb.set_trace()	
 		return context
 
 
@@ -111,7 +125,7 @@ class ConferenceUpdate(LoginRequiredMixin, UpdateView):
 
 	def get_object(self, queryset=None):
 		obj = super(ConferenceUpdate, self).get_object()
-		if not obj.owner == self.request.user:
+		if not self.request.user.has_perm('conferences.conference.can_change_conference'):
 			raise Http404
 		return obj
 
