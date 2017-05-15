@@ -39,7 +39,8 @@ class ConferenceList(ListView):
 				Q(description__icontains=query)
 				).order_by('-start_date')
 		if self.kwargs and self.kwargs['slug']:
-				return Conference.objects.filter(categories__slug=self.kwargs['slug']).order_by('-start_date')			
+				query = Conference.objects.filter(categories__slug=self.kwargs['slug']).order_by('-start_date')
+				if query: return query				
 		return Conference.objects.all().order_by('-start_date')
 		
 
