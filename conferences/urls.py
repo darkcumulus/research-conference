@@ -14,4 +14,7 @@ urlpatterns = [
 	url(r'^update/(?P<pk>\d+)/$',ConferenceUpdate.as_view(), name='conference-update'),
 	url(r'^delete/(?P<pk>\d+)/$',ConferenceDelete.as_view(), name='conference-delete'),
 
+	url(r'^categories/$',ConferenceList.as_view(), name='categories-list' ),
+	url(r'^categories/(?P<slug>[^/]+)?$',ConferenceList.as_view(), name='categories-list' ),
+
 ]

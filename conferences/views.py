@@ -36,9 +36,10 @@ class ConferenceList(ListView):
 				Q(title__icontains=query) |
 				Q(venue__icontains=query) |
 				Q(contact_details__icontains=query) |
-				Q(description__icontains=query) |
-				Q(keywords__slug__icontains=query)
+				Q(description__icontains=query)
 				).order_by('-start_date')
+		if self.kwargs and self.kwargs['slug']:
+				return Conference.objects.filter(categories__slug=self.kwargs['slug']).order_by('-start_date')			
 		return Conference.objects.all().order_by('-start_date')
 		
 

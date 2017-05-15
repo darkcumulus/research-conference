@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static from  staticfiles %}
+
+{% block title %}HomePage{% endblock %}
+{% block styles %}{% endblock %}
+
+{% block content %}
+        <hr>
+        <div class="container">
+            <section>
+                <div id="main" class="tile">
+                {% include "conferences/categories-list.html" %}                
+               	{% for x in conferences %}
+               		<h5>{{x}}</h5>
+               	{% endfor %}
+                </div>
+            </section>
+        </div> <!--container div --> 
+{% endblock %}

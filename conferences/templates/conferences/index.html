@@ -34,7 +34,7 @@
                                 <div class="column is-10">
                                     <div class="entry-body">
                                         <p class="title is-5 ">
-                                        <a href="{{conference.pk}}">{{conference.title}}</a>
+                                        <a href="{% url 'conf:conference-list' %}{{conference.pk}}">{{conference.title}}</a>
                                         </p>
                                         <p class="subtitle is-6 is-marginless"><strong>Venue</strong>: {{conference.venue}}</p>
                                         <p class="subtitle is-6 is-marginless"><strong>Event Date</strong>: {{conference.start_date}}-{{conference.end_date}}</p>
