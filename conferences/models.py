@@ -67,6 +67,7 @@ class Keyword(tagulous.models.TagTreeModel):
 		space_delimiter = False 
 		autocomplete_view = 'conference_keywords_autocomplete'
 
+
 class Conference(BaseProfile):
 	LEVEL_CHOICES = (
 		('0', 'unknown'),
@@ -111,6 +112,19 @@ class Conference(BaseProfile):
 	def get_organizers_long(self, flag=True):
 		ret = ",".join([org.fullname for org in self.organizers.all()])
 		return ret
+
+class Comment(BaseProfile):
+	conference = models.ForeignKey(Conference, related_name='comments')
+	name = models.CharField(max_length=80)
+	email = models.EmailField()
+	body = models.TextField()
+	active = models.BooleanField(default=True)
+
+	class Meta:
+		ordering = ('created',)
+
+	def __str__(self):
+		return 'Comment by {} on {}'.format(self.name, self.conference)
 
 class Author(BaseProfile):
     GENDER_CHOICES = (

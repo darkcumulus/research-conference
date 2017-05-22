@@ -1,8 +1,16 @@
 from django.contrib import admin
-from .models import Conference, Organizer, Study, Author, Category
+from .models import Conference, Organizer, Study, Author, Category, Comment
 
 import tagulous.admin 
 from conferences import models 
+
+class CommentAdmin(admin.ModelAdmin):
+	list_display = ('name', 'email', 'conference', 'created', 'active')
+	list_filter = ('active', 'created', 'updated')
+	search_fields = ('name', 'email', 'body')
+
+admin.site.register(Comment, CommentAdmin)
+
 
 class CategoryAdmin(admin.ModelAdmin):
 	list_display = ('name', 'created', 'updated')

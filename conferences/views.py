@@ -8,7 +8,8 @@ from django.http import Http404
 from django import template 
 
 
-from .models import Conference, Category
+from .models import Conference, Category, Comment
+from .forms import CommentForm
 import datetime
 
 register = template.Library()
@@ -72,13 +73,21 @@ class ConferenceDetail(DetailView):
 		# import pdb; pdb.set_trace()	
 		return url
 
+	def form_valid(self, form):
+		#import pdb; pdb.set_trace()		
+		return super(ConferenceDetail,self).form_valid(form)	
+
 	def get_context_data(self, **kwargs):
-		context = super(ConferenceDetail, self).get_context_data(**kwargs)
+		context = super(ConferenceDetail, self).get_context_data(**kwargs)			
+
 		# import pdb; pdb.set_trace()	
 		url = context['conference'].poster_file_url		
 
 		context['object'].download_url = self.get_gdrive_poster_link(url)
 		context['object'].cats= Category.objects.all()
+		context['comment_form'] = CommentForm
+		context['comments'] = context['conference'].comments.filter(active=True)
+
 
 		# import pdb; pdb.set_trace()	
 		return context

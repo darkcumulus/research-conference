@@ -118,18 +118,50 @@
 
                     <div class="field is-horizontal">
                       <div class="field-label is-large">
-                        <label class="label sizeup">Comment</label>
-                      </div><br>
+                        <label class="label sizeup">Comment(s)</label>
+                      </div><br>                   
+
                       <div class="field-body">
-                        <div class="field">
-                          <div class="control">
-                            <input class="input is-large" type="text" placeholder="Insert Comment">
-                          </div>
-                          <div class="control">
-                            <button class="button is-primary">Send Message</button>
-                          </div>
-                        </div>
+
+                        <div class="field">                        
+                          <form action="" method="post">{% csrf_token %}
+                              <!-- textfield -->
+                              <div class="control">
+                                <input class="input is-large" type="text" placeholder="Insert Comment">
+                              </div>
+                              <!--textfield -->
+
+                              <!-- Button -->
+                              <div class="control">
+                                <button class="button is-primary">Send Message</button>
+                              </div>
+                              <!-- Button -->
+                          </form> 
+                        </div> <!-- field div -->
                       </div>
+                      <br><br>
+                       {% for comment in comments %}
+                          <div class="spacer"></div>
+                          <article class="media">
+                            <figure class="media-left">
+                              <p class="image is-64x64">
+                                <img src="http://placehold.it/128x128">
+                              </p>
+                            </figure>
+                            <div class="media-content">
+                              <div class="content">
+                                <p>
+                                  <strong>{{comment.name}}</strong> <small> · 3 hrs</small>
+                                  <br>
+                                  {{comment.body}}
+                                  <br>
+                                  <small><a>Like</a> · <a>Reply</a></small>
+                                </p>
+                              </div>
+                            </div>
+                          </article>
+                      {% endfor %}
+                      <hr>
                     </div>
                   </div> <!--second main column -->
 
