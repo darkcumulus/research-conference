@@ -4,6 +4,7 @@ A responsive web application that lists upcoming conferences, in a more direct-t
 # Features
 The usual, commenting system, Image uploads, search/group by category, search/group by keywords (hashtags), time for humans ( a min ago, 12 days ago, 3 weeks from now etc), pagination, and using bulma (meaning its a responsive app).
 
+
 # Interface
 Made with bulma CSS library (not a designer sorry) thanks to the author!
 
@@ -25,3 +26,10 @@ Made with bulma CSS library (not a designer sorry) thanks to the author!
 ------------------------------
 ![id](https://drive.google.com/uc?id=0B-HPOmKexAcsYlh6TF9sTHEweEk "Admin Page listing of conferences")
 
+# Todo
+ * related conferences
+ * refactor
+ * some statistics section
+ * tests
+ 
+ 
