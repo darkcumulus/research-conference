@@ -96,7 +96,7 @@ class Conference(BaseProfile):
 	
 	objects = models.Manager()
 	pending = PendingManager()
-	
+
 	
 	class Meta:
 		ordering = ('title',)
@@ -115,10 +115,10 @@ class Conference(BaseProfile):
 
 class Comment(BaseProfile):
 	conference = models.ForeignKey(Conference, related_name='comments')
-	name = models.CharField(max_length=80)
-	email = models.EmailField()
+	name = models.CharField(blank=True,max_length=80)
+	email = models.EmailField(blank=True)
 	body = models.TextField()
-	active = models.BooleanField(default=True)
+	active = models.BooleanField(default=False)
 
 	class Meta:
 		ordering = ('created',)

@@ -127,7 +127,7 @@
                           <form action="" method="post">{% csrf_token %}
                               <!-- textfield -->
                               <div class="control">
-                                <input class="input is-large" type="text" placeholder="Insert Comment">
+                                <input class="input is-large" type="text" placeholder="Insert Comment" name='body'>
                               </div>
                               <!--textfield -->
 
@@ -139,19 +139,19 @@
                           </form> 
                         </div> <!-- field div -->
                       </div>
-                      <br><br>
+                      <br>
                        {% for comment in comments %}
                           <div class="spacer"></div>
                           <article class="media">
-                            <figure class="media-left">
+                          <figure class="media-left">
                               <p class="image is-64x64">
-                                <img src="http://placehold.it/128x128">
+                                <img src="https://epicattorneymarketing.com/wp-content/uploads/2016/07/Headshot-Placeholder-1.png">
                               </p>
                             </figure>
                             <div class="media-content">
                               <div class="content">
                                 <p>
-                                  <strong>{{comment.name}}</strong> <small> · 3 hrs</small>
+                                  <strong>{{comment.name}}</strong> <small> · {{comment.updated|naturaltime}}</small>
                                   <br>
                                   {{comment.body}}
                                   <br>
@@ -160,6 +160,7 @@
                               </div>
                             </div>
                           </article>
+                          <br>
                       {% endfor %}
                       <hr>
                     </div>

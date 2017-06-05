@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.db.models import Q
 from django.http import Http404
-
+from django.urls import reverse
 from django import template 
 
 
@@ -18,7 +18,6 @@ register = template.Library()
 def display_cat():
 	allcategories = Category.objects.all()
 	return {'allcategories':allcategories}
-
 
 class ConferenceList(ListView):
 	model = Conference
@@ -73,9 +72,21 @@ class ConferenceDetail(DetailView):
 		# import pdb; pdb.set_trace()	
 		return url
 
-	def form_valid(self, form):
-		#import pdb; pdb.set_trace()		
-		return super(ConferenceDetail,self).form_valid(form)	
+	def post(self, request, pk):
+		comment_form = CommentForm(request.POST)
+		# import pdb; pdb.set_trace()
+		if comment_form.is_valid():
+			new_comment = comment_form.save(commit=False)
+			if request.user.username:
+				new_comment.name = request.user.username 
+				new_comment.email = request.user.email 
+			else:
+				new_comment.name = 'anonymous'
+				new_comment.email = 'noemail@gmail.com'
+
+			new_comment.conference = self.get_object()
+			new_comment.save()
+		return redirect(reverse('conf:conference-detail',args=(pk,)))
 
 	def get_context_data(self, **kwargs):
 		context = super(ConferenceDetail, self).get_context_data(**kwargs)			
@@ -85,12 +96,12 @@ class ConferenceDetail(DetailView):
 
 		context['object'].download_url = self.get_gdrive_poster_link(url)
 		context['object'].cats= Category.objects.all()
+
 		context['comment_form'] = CommentForm
 		context['comments'] = context['conference'].comments.filter(active=True)
 
-
-		# import pdb; pdb.set_trace()	
 		return context
+
 
 
 
