@@ -1,4 +1,4 @@
-# Kumperensya
+# URO-Conference App
 A responsive web application that lists upcoming conferences, in a more direct-to-the-point way . created for PSU University Research Office. 
 
 # Features
@@ -30,6 +30,7 @@ Made with bulma CSS library (not a designer sorry) thanks to the author!
  * related conferences
  * refactor
  * some statistics section
+ * static photos (currently photos are random)
  * tests
  
  
