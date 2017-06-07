@@ -59,25 +59,27 @@
                             <p>
                               {{object.description|markdownify|safe}}
                             </p>
-
                         </div>
                       </article>
                       <hr>
-                      <div class="columns ">
-                        <div class="column is-one-quarter">
-                          <a href="{{object.download_url}}" class="button is-danger">
-                          <span class="icon is-small">
+
+                  <div class="field is-grouped">
+                    <p class="control">
+                      <a href="{{object.download_url}}" class="button is-danger">
+                        <span class="icon is-small">
                           <i class="fa fa-download">
-                          </i></span><span>Download Poster here</span></a>
-                        </div>
-                        <div class="column">
-                          <a href="{{ object.poster_file_url}}" target="_blank" class="button is-danger">
-                          <span class="icon is-small">
+                          </i></span><span>Get poster here</span>
+                      </a>
+                    </p>
+                    <p class="control">
+                      <a href="{{ object.poster_file_url}}" target="_blank" class="button is-danger">
+                        <span class="icon is-small">
                           <i class="fa fa-book">
                           </i></span>
-                          <span>Read Online</span></a>
-                        </div>
-                      </div>
+                          <span>Read Online</span>      
+                    </a>
+                    </p>
+                  </div>
                     <hr>
                     <strong><p class="sizeup">Related Conferences</p></strong><br>
                     <div class="columns">
