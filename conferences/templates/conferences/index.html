@@ -4,19 +4,23 @@
 {% block rightside %}
             <div class="tile is-parent is-9">
                 <div class="content">
-                    <div class="columns">
+                    
                         <div class="column is-12">
                             <form method='GET' action=''>
-                                <p class="control is-horizontal is-large">
-                                  <input class="input" name='q' type="text" value="{{request.GET.q}}" placeholder="Find a post">
-                                  <button class="button">
-                                    Search
-                                  </button>
-                                </p>
+                                <div class="field has-addons">
+                                    <p class="control is-expanded">       
+                                        <input class="input" name='q' type="text" value="{{request.GET.q}}" placeholder="Find a conference">
+                                     
+                                    </p>
+                                    <p class="control">
+                                        <a class="button is-static is-dark">&nbsp; 
+                                          <i class="fa fa-search"></i>&nbsp; 
+                                        </a>                                           
+                                    </p>
+                                </div>
                             </form>
                         </div>
-                        
-                    </div>                 
+                                   
                     <br>
                     <ul>
                         {% for conference in conferences  %}
