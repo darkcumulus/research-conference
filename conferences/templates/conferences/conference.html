@@ -116,29 +116,29 @@
                             </p>                    
                     <hr>
 
-                    <div class="field is-horizontal">
-                      <div class="field-label is-large">
-                        <label class="label sizeup">Comment(s)</label>
-                      </div><br>                   
 
+                    <div class="field">
+                      <div class="label">
+                        <label class="label is-large">Comment(s)</label>
+                      </div>
                       <div class="field-body">
 
-                        <div class="field">                        
-                          <form action="" method="post">{% csrf_token %}
-                              <!-- textfield -->
-                              <div class="control">
-                                <input class="input is-large" type="text" placeholder="Insert Comment" name='body'>
-                              </div>
-                              <!--textfield -->
-
-                              <!-- Button -->
-                              <div class="control">
-                                <button class="button is-primary">Send Message</button>
-                              </div>
-                              <!-- Button -->
-                          </form> 
-                        </div> <!-- field div -->
+                        <div class="field">
+                         <form action="" method="post">{% csrf_token %}
+                            <div class="control">
+                              <textarea class="textarea" placeholder="Explain how we can help you" name='body'></textarea>
+                            </div>
+                            <div class="field-label">                              
+                            </div>
+                            <div class="control">
+                             <button class="button is-primary">Send message
+                             </button>
+                            </div>   
+                         </form>
+                        </div>
                       </div>
+                    </div>
+                   
                       <br>
                        {% for comment in comments %}
                           <div class="spacer"></div>
