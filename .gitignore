@@ -15,8 +15,6 @@ dist/
 *.sqlite3
 *.bat
 .idea/
-assets/fonts/
-assets/images/
 media_cdn/
 env27/
 env36/
