@@ -50,10 +50,10 @@ INSTALLED_APPS = [
     "users",
     "tagulous",
 ]
-if DJANGO_MODE == "local":
-    INSTALLED_APPS += [
-        "debug_toolbar",
-    ]
+# if DJANGO_MODE == "local":
+#     INSTALLED_APPS += [
+#         "debug_toolbar",
+#     ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -65,9 +65,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-if DJANGO_MODE == "local":
-    MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
-    INTERNAL_IPS = ["127.0.0.1", "localhost"]
+# if DJANGO_MODE == "local":
+#     MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
+#     INTERNAL_IPS = ["127.0.0.1", "localhost"]
 
 ROOT_URLCONF = "consite.urls"
 
