@@ -11,21 +11,28 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
+DJANGO_MODE = os.getenv('DJANGO_MODE', 'production').lower()
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'cwzd8$#^3^w#2c%0@vq$$2=^@z3se)312%z67ls)^_1zhp(+8)'
+SECRET_KEY = os.getenv('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if DJANGO_MODE == 'local':
+    DEBUG = True
+else:
+    DEBUG = False
 
-ALLOWED_HOSTS = ['3e853c5f.ngrok.io', 'localhost']
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
