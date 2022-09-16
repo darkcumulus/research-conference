@@ -1,58 +1,69 @@
-
 #main-contents {
-    background-color: white;
-
+  background-color: white;
 }
 
 #main > div > article > ul > li {
-    color: #ff4629;
+  color: #ff4629;
 }
 
-#main>div>article {
-	font-size: 17px;
-	margin-left: 15px;
-	font-weight: bold;
-
+#main > div > article {
+  font-size: 17px;
+  margin-left: 15px;
+  font-weight: bold;
 }
 
-.content>ul>li {
-    list-style: None;
+.content > ul > li {
+  list-style: None;
 }
 
 .entry-thumbnail {
-    width: 17.80%;
-    float: left;
-
+  width: 17.8%;
+  float: left;
 }
-.entry-thumbnail-detail{
-    width: 30.80%;
-    float: left;
-
+.entry-thumbnail-detail {
+  width: 30.8%;
+  float: left;
 }
 
 .sizeup {
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 
 .justify-it {
-    text-align: justify;
-    text-justify:inter-word;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .marginalized > li {
-    line-height: 16px;
-    margin-bottom: 18px;
-    font-weight: bold;
+  line-height: 16px;
+  margin-bottom: 18px;
+  font-weight: bold;
 }
 
 #pagination-setting {
-    margin-left: 25px ;
+  margin-left: 25px;
 }
 
-#sidetext{
-    color:#ff4629 !important;
-
+#sidetext {
+  color: #ff4629 !important;
 }
 footer {
-    background-color: white !important;
+  background-color: white !important;
+}
+#conference-info > table {
+  font-size: 1.2rem;
+  width: 100%;
+}
+#conference-info > table > tbody > tr > th:nth-of-type(1) {
+  width: 35%;
+}
+#conference-info > table > tbody > tr > th:nth-of-type(2) {
+  width: 0.5%;
+  text-align: left;
+  font-weight: 400;
+}
+
+#conference-info > table > tbody > tr > th:nth-of-type(3) {
+  width: 64%;
+  font-weight: 400;
 }

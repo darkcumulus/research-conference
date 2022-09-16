@@ -3,170 +3,187 @@
 {% load markdownify %}
 {% load staticfiles%}
 {% block rightside %}
-            <div class="tile is-parent is-9">
-                    <div class="tile is-child is-12">
-                      <div class="column is-paddingless is-marginless">
-                          <p class="title is-3">{{ object.title }}</p>
-                          <p class="subtitle is-5"><i>{{object.get_organizers_long}}</i></p>
-                          <hr>
-                      </div>
-                      <article class="columns">
-                        <div class="column">
-                          <figure class="image is-128by128">
-                            {% if object.poster_image.url != None %}
-                              <img src="{{object.poster_image.url}}">
-                            {% else %}
-                              <img src="{% static "images/photo_not_available.jpg" %}" alt="not available">
-                            {% endif %}
-                          </figure>
-                        </div>
-                        <div class="column">
-                          <div class="content">
-                            <div class="columns is-mobile sizeup">
-                              <div class="column is-marginless">
-                                <p><strong>Venue :</strong></p>
-                                <p><strong>Level :</strong></p>
-                              	<p><strong>Event Date :</strong></p>
-                                <p><strong>Registration :</strong></p>
-                                <p><strong>Abstract (DL):</strong></p>
-                                <br>
-                                <p><strong>Paper (DL) :</strong></p>
-                                <br>
-                                <p></i><strong>Contact :</strong></p>
-                              </div>
-                              <div class="column is-marginless is-8">
-                                <p>{{object.venue}}</p>
-                                <p>{{object.get_level_display}}</p>
-                                <p>{{object.start_date}} - {{object.end_date}}</p>
-                                <p>P{{object.registration_fee|intcomma}}</p>
-                                <p>{{object.abstract_deadline}}<br>({{object.abstract_deadline|naturaltime}})</p>
-                              
-                                <p>{{object.paper_deadline}}<br>({{object.paper_deadline|naturaltime}})</p>
+<div class="tile is-parent is-9">
+  <div class="tile is-child is-12">
+    <div class="column is-paddingless is-marginless">
+      <p class="title is-3">{{ object.title }}</p>
+      <p class="subtitle is-5"><i>{{object.get_organizers_long}}</i></p>
+      <hr>
+    </div>
+    <article class="columns">
+      <div class="column">
+        <figure id="poster-image" class="image is-square">
+          {% if object.poster_image.url != None %}
+          <img src="{{object.poster_image.url}}">
+          {% else %}
+          <img src="{% static " images/photo_not_available.jpg" %}" alt="not available">
+          {% endif %}
+        </figure>
+      </div>
+      <div id="conference-info" class="column">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th><strong>Venue </strong></th>
+              <th>:</th>
+              <th>{{object.venue}}</th>
+            </tr>
+            <tr>
+              <th>Level</th>
+              <th>:</th>
+              <th>{{object.get_level_display}}</th>
+            </tr>
+            <tr>
+              <th>Event Date</th>
+              <th>:</th>
+              <th>{{object.start_date}} - {{object.end_date}}</th>
+            </tr>
+            <tr>
+              <th>Registration</th>
+              <th>:</th>
+              <th>P{{object.registration_fee|intcomma}}</th>
+            </tr>
+            <tr>
+              <th>Abstract (DL)</th>
+              <th>:</th>
+              <th>{{object.abstract_deadline}}<br>({{object.abstract_deadline|naturaltime}})</th>
+            </tr>
+            <tr>
+              <th>Paper (DL)</th>
+              <th>:</th>
+              <th>{{object.paper_deadline}}<br>({{object.paper_deadline|naturaltime}})</th>
+            </tr>
+            <tr>
+              <th>Contact</th>
+              <th>:</th>
+              <th>{{object.contact_details|linebreaks}}</th>
+            </tr>
 
-                                <p>{{object.contact_details|linebreaks}}</p>                               
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </article>
-                      <hr>
-                        <article class="columns">
-                        <div class="column sizeup justify-it">
-                            <p> 
-                              <strong>Description of the event</strong>:
-                            </p>
-                            <p>
-                              {{object.description|markdownify|safe}}
-                            </p>
-                        </div>
-                      </article>
-                      <hr>
+          </tbody>
+        </table>
 
-                  <div class="field is-grouped">
-                    <p class="control">
-                      <a href="{{object.download_url}}" class="button is-danger">
-                        <span class="icon is-small">
-                          <i class="fa fa-download">
-                          </i></span><span>Get poster here</span>
-                      </a>
-                    </p>
-                    <p class="control">
-                      <a href="{{ object.poster_file_url}}" target="_blank" class="button is-danger">
-                        <span class="icon is-small">
-                          <i class="fa fa-book">
-                          </i></span>
-                          <span>Read Online</span>      
-                    </a>
-                    </p>
-                  </div>
-                    <hr>
-                    <strong><p class="sizeup">Related Conferences</p></strong><br>
-                    <div class="columns">
-                      <div class="column">
-                          <figure class="image">
-                            <img src="https://unsplash.it/800/600/?random">
-                          </figure>
-                          <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
-                      </div>
-                      <div class="column">
-                          <figure class="image">
-                            <img src="https://unsplash.it/800/600/?random">
-                          </figure>
-                          <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
-                      </div>
-                      <div class="column">
-                          <figure class="image">
-                            <img src="https://unsplash.it/800/600/?random">
-                          </figure>
-                          <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
-                      </div>
-                      <div class="column">
-                          <figure class="image">
-                            <img src="https://unsplash.it/800/600/?random">
-                          </figure>
-                          <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
-                      </div>
-                    </div>
-                            <br>
-                            <p>
-                              <i class="fa fa-folder-open fa-1"></i>
-                              <strong>Keywords</strong>: 
-                              {% for k in object.keywords.values %}
-                                  <a href="{% url 'conf:conference-list' %}?q={{k.slug}}">#{{k.slug}}</a>
-                              {% endfor %}
-                            </p>                    
-                    <hr>
+      </div>
+    </article>
+    <hr>
+    <article class="columns">
+      <div class="column sizeup justify-it">
+        <p>
+          <strong>Event Description</strong>:
+        </p>
+        <p>
+          {{object.description|markdownify|safe}}
+        </p>
+      </div>
+    </article>
+    <hr>
+
+    <div class="field is-grouped">
+      <p class="control">
+        <a href="{{object.download_url}}" class="button is-danger">
+          <span class="icon is-small">
+            <i class="fa fa-download">
+            </i></span><span>Get poster here</span>
+        </a>
+      </p>
+      <p class="control">
+        <a href="{{ object.poster_file_url}}" target="_blank" class="button is-danger">
+          <span class="icon is-small">
+            <i class="fa fa-book">
+            </i></span>
+          <span>Read Online</span>
+        </a>
+      </p>
+    </div>
+    <hr>
+    <strong>
+      <p class="sizeup">Related Conferences</p>
+    </strong><br>
+    <div class="columns">
+      <div class="column">
+        <figure class="image">
+          <img src="https://unsplash.it/800/600/?random">
+        </figure>
+        <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
+      </div>
+      <div class="column">
+        <figure class="image">
+          <img src="https://unsplash.it/800/600/?random">
+        </figure>
+        <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
+      </div>
+      <div class="column">
+        <figure class="image">
+          <img src="https://unsplash.it/800/600/?random">
+        </figure>
+        <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
+      </div>
+      <div class="column">
+        <figure class="image">
+          <img src="https://unsplash.it/800/600/?random">
+        </figure>
+        <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
+      </div>
+    </div>
+    <br>
+    <p>
+      <i class="fa fa-folder-open fa-1"></i>
+      <strong>Keywords</strong>:
+      {% for k in object.keywords.values %}
+      <a href="{% url 'conf:conference-list' %}?q={{k.slug}}">#{{k.slug}}</a>
+      {% endfor %}
+    </p>
+    <hr>
 
 
-                    <div class="field">
-                      <div class="label">
-                        <label class="label is-large">Comment(s)</label>
-                      </div>
-                      <div class="field-body">
+    <div class="field">
+      <div class="label">
+        <label class="label is-large">Comment(s)</label>
+      </div>
+      <div class="field-body">
 
-                        <div class="field">
-                         <form action="" method="post">{% csrf_token %}
-                            <div class="control">
-                              <textarea class="textarea" placeholder="Explain how we can help you" name='body'></textarea>
-                            </div>
-                            <div class="field-label">                              
-                            </div>
-                            <div class="control">
-                             <button class="button is-primary">Send message
-                             </button>
-                            </div>   
-                         </form>
-                        </div>
-                      </div>
-                    </div>
-                   
-                      <br>
-                       {% for comment in comments %}
-                          <div class="spacer"></div>
-                          <article class="media">
-                          <figure class="media-left">
-                              <p class="image is-64x64">
-                                <img src="https://epicattorneymarketing.com/wp-content/uploads/2016/07/Headshot-Placeholder-1.png">
-                              </p>
-                            </figure>
-                            <div class="media-content">
-                              <div class="content">
-                                <p>
-                                  <strong>{{comment.name}}</strong> <small> · {{comment.updated|naturaltime}}</small>
-                                  <br>
-                                  {{comment.body}}
-                                  <br>
-                                  <small><a>Like</a> · <a>Reply</a></small>
-                                </p>
-                              </div>
-                            </div>
-                          </article>
-                          <br>
-                      {% endfor %}
-                      <hr>
-                    </div>
-                  </div> <!--second main column -->
+        <div class="field">
+          <form action="" method="post">{% csrf_token %}
+            <div class="control">
+              <textarea class="textarea" placeholder="Explain how we can help you" name='body'></textarea>
+            </div>
+            <div class="field-label">
+            </div>
+            <div class="control">
+              <button class="button is-primary">Send message
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
-            </div>            
+    <br>
+    {% for comment in comments %}
+    <div class="spacer"></div>
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <img src="https://epicattorneymarketing.com/wp-content/uploads/2016/07/Headshot-Placeholder-1.png">
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong>{{comment.name}}</strong> <small> · {{comment.updated|naturaltime}}</small>
+            <br>
+            {{comment.body}}
+            <br>
+            <small><a>Like</a> · <a>Reply</a></small>
+          </p>
+        </div>
+      </div>
+    </article>
+    <br>
+    {% endfor %}
+    <hr>
+  </div>
+</div>
+<!--second main column -->
+
+</div>
 {% endblock %}

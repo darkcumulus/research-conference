@@ -46,7 +46,6 @@ admin.site.register(Organizer, OrganizerAdmin)
 
 class ConferenceAdmin(admin.ModelAdmin):
     list_display = (
-        "id",
         "title",
         "level",
         "registration_fee",
