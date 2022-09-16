@@ -20,3 +20,4 @@ env27/
 env36/
 db.sqlite3
 tags
+.env
