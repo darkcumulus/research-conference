@@ -92,7 +92,7 @@ class Conference(BaseProfile):
         ("4", "international"),
     )
     title = models.TextField(max_length=256, help_text="Enter conference name")
-    poster_image = models.FileField(null=True, blank=True)
+    poster_image = models.FileField(upload_to="uploads/", null=True, blank=True)
     level = models.CharField(
         max_length=1,
         choices=LEVEL_CHOICES,
