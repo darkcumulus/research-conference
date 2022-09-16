@@ -10,52 +10,72 @@ from django.utils.timezone import utc
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('conferences', '0014_auto_20170323_1400'),
+        ("conferences", "0014_auto_20170323_1400"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='conference',
-            name='poster',
+            model_name="conference",
+            name="poster",
         ),
         migrations.AddField(
-            model_name='conference',
-            name='poster_file_url',
-            field=models.URLField(blank=True, help_text='Upload the PDF/DOCX Poster here (ZIP/RAR format)'),
+            model_name="conference",
+            name="poster_file_url",
+            field=models.URLField(
+                blank=True, help_text="Upload the PDF/DOCX Poster here (ZIP/RAR format)"
+            ),
         ),
         migrations.AddField(
-            model_name='conference',
-            name='poster_image',
-            field=models.FileField(blank=True, null=True, upload_to=''),
+            model_name="conference",
+            name="poster_image",
+            field=models.FileField(blank=True, null=True, upload_to=""),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='abstract_deadline',
-            field=models.DateTimeField(blank=True, default=datetime.datetime(2017, 4, 18, 8, 7, 25, 147434, tzinfo=utc), verbose_name='Deadline of Abstract Submission'),
+            model_name="conference",
+            name="abstract_deadline",
+            field=models.DateTimeField(
+                blank=True,
+                default=datetime.datetime(2017, 4, 18, 8, 7, 25, 147434, tzinfo=utc),
+                verbose_name="Deadline of Abstract Submission",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='end_date',
-            field=models.DateField(default=datetime.datetime(2017, 5, 5, 8, 7, 25, 147434, tzinfo=utc), verbose_name='Date Ended'),
+            model_name="conference",
+            name="end_date",
+            field=models.DateField(
+                default=datetime.datetime(2017, 5, 5, 8, 7, 25, 147434, tzinfo=utc),
+                verbose_name="Date Ended",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='organizers',
-            field=models.ManyToManyField(to='conferences.Organizer', verbose_name='List of Organizers'),
+            model_name="conference",
+            name="organizers",
+            field=models.ManyToManyField(
+                to="conferences.Organizer", verbose_name="List of Organizers"
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='paper_deadline',
-            field=models.DateTimeField(blank=True, default=datetime.datetime(2017, 4, 23, 8, 7, 25, 148434, tzinfo=utc), verbose_name='Deadline of Paper Submission'),
+            model_name="conference",
+            name="paper_deadline",
+            field=models.DateTimeField(
+                blank=True,
+                default=datetime.datetime(2017, 4, 23, 8, 7, 25, 148434, tzinfo=utc),
+                verbose_name="Deadline of Paper Submission",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='start_date',
-            field=models.DateField(default=datetime.datetime(2017, 5, 3, 8, 7, 25, 147434, tzinfo=utc), verbose_name='Date Started'),
+            model_name="conference",
+            name="start_date",
+            field=models.DateField(
+                default=datetime.datetime(2017, 5, 3, 8, 7, 25, 147434, tzinfo=utc),
+                verbose_name="Date Started",
+            ),
         ),
         migrations.AlterField(
-            model_name='study',
-            name='authors',
-            field=models.ManyToManyField(to='conferences.Author', verbose_name='List of authors'),
+            model_name="study",
+            name="authors",
+            field=models.ManyToManyField(
+                to="conferences.Author", verbose_name="List of authors"
+            ),
         ),
     ]

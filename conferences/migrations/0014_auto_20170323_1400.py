@@ -10,33 +10,47 @@ from django.utils.timezone import utc
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('conferences', '0013_auto_20170323_1351'),
+        ("conferences", "0013_auto_20170323_1351"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='conference',
-            name='abstract_deadline',
-            field=models.DateTimeField(blank=True, default=datetime.datetime(2017, 4, 7, 6, 0, 20, 400124, tzinfo=utc), verbose_name='Deadline of Abstract Submission'),
+            model_name="conference",
+            name="abstract_deadline",
+            field=models.DateTimeField(
+                blank=True,
+                default=datetime.datetime(2017, 4, 7, 6, 0, 20, 400124, tzinfo=utc),
+                verbose_name="Deadline of Abstract Submission",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='description',
+            model_name="conference",
+            name="description",
             field=models.TextField(blank=True, max_length=512),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='end_date',
-            field=models.DateField(default=datetime.datetime(2017, 4, 24, 6, 0, 20, 400124, tzinfo=utc), verbose_name='Date Ended'),
+            model_name="conference",
+            name="end_date",
+            field=models.DateField(
+                default=datetime.datetime(2017, 4, 24, 6, 0, 20, 400124, tzinfo=utc),
+                verbose_name="Date Ended",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='paper_deadline',
-            field=models.DateTimeField(blank=True, default=datetime.datetime(2017, 4, 12, 6, 0, 20, 401124, tzinfo=utc), verbose_name='Deadline of Paper Submission'),
+            model_name="conference",
+            name="paper_deadline",
+            field=models.DateTimeField(
+                blank=True,
+                default=datetime.datetime(2017, 4, 12, 6, 0, 20, 401124, tzinfo=utc),
+                verbose_name="Deadline of Paper Submission",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='start_date',
-            field=models.DateField(default=datetime.datetime(2017, 4, 22, 6, 0, 20, 400124, tzinfo=utc), verbose_name='Date Started'),
+            model_name="conference",
+            name="start_date",
+            field=models.DateField(
+                default=datetime.datetime(2017, 4, 22, 6, 0, 20, 400124, tzinfo=utc),
+                verbose_name="Date Started",
+            ),
         ),
     ]

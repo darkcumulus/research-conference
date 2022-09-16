@@ -13,59 +13,115 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('conferences', '0004_auto_20170321_1014'),
+        ("conferences", "0004_auto_20170321_1014"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Study',
+            name="Study",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True, db_index=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
-                ('title', models.CharField(max_length=256, unique=True, verbose_name='Research Title')),
-                ('research_type', models.CharField(choices=[('0', 'unknown'), ('1', 'study'), ('2', 'project')], default=0, max_length=1, verbose_name='Type of Research')),
-                ('presentation_type', models.CharField(choices=[('0', 'unknown'), ('1', 'oral'), ('2', 'poster')], default=0, max_length=1, verbose_name='Type of Presentation')),
-                ('other_info', models.TextField(blank=True)),
-                ('authors', models.ManyToManyField(to=settings.AUTH_USER_MODEL, verbose_name='List of authors')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True, db_index=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                (
+                    "title",
+                    models.CharField(
+                        max_length=256, unique=True, verbose_name="Research Title"
+                    ),
+                ),
+                (
+                    "research_type",
+                    models.CharField(
+                        choices=[("0", "unknown"), ("1", "study"), ("2", "project")],
+                        default=0,
+                        max_length=1,
+                        verbose_name="Type of Research",
+                    ),
+                ),
+                (
+                    "presentation_type",
+                    models.CharField(
+                        choices=[("0", "unknown"), ("1", "oral"), ("2", "poster")],
+                        default=0,
+                        max_length=1,
+                        verbose_name="Type of Presentation",
+                    ),
+                ),
+                ("other_info", models.TextField(blank=True)),
+                (
+                    "authors",
+                    models.ManyToManyField(
+                        to=settings.AUTH_USER_MODEL, verbose_name="List of authors"
+                    ),
+                ),
             ],
             options={
-                'verbose_name_plural': 'Presentations',
-                'ordering': ('title',),
+                "verbose_name_plural": "Presentations",
+                "ordering": ("title",),
             },
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='abstract_deadline',
-            field=models.DateField(default=datetime.datetime(2017, 4, 5, 6, 42, 15, 275499, tzinfo=utc), verbose_name='Deadline of Abstract Submission'),
+            model_name="conference",
+            name="abstract_deadline",
+            field=models.DateField(
+                default=datetime.datetime(2017, 4, 5, 6, 42, 15, 275499, tzinfo=utc),
+                verbose_name="Deadline of Abstract Submission",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='end_date',
-            field=models.DateField(default=datetime.datetime(2017, 4, 22, 6, 42, 15, 275499, tzinfo=utc), verbose_name='Date Ended'),
+            model_name="conference",
+            name="end_date",
+            field=models.DateField(
+                default=datetime.datetime(2017, 4, 22, 6, 42, 15, 275499, tzinfo=utc),
+                verbose_name="Date Ended",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='paper_deadline',
-            field=models.DateField(default=datetime.datetime(2017, 4, 10, 6, 42, 15, 276499, tzinfo=utc), verbose_name='Deadline of Paper Submission'),
+            model_name="conference",
+            name="paper_deadline",
+            field=models.DateField(
+                default=datetime.datetime(2017, 4, 10, 6, 42, 15, 276499, tzinfo=utc),
+                verbose_name="Deadline of Paper Submission",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='start_date',
-            field=models.DateField(default=datetime.datetime(2017, 4, 20, 6, 42, 15, 275499, tzinfo=utc), verbose_name='Date Started'),
+            model_name="conference",
+            name="start_date",
+            field=models.DateField(
+                default=datetime.datetime(2017, 4, 20, 6, 42, 15, 275499, tzinfo=utc),
+                verbose_name="Date Started",
+            ),
         ),
         migrations.AddField(
-            model_name='study',
-            name='conference',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='conferences.Conference', verbose_name='Conference Title'),
+            model_name="study",
+            name="conference",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="conferences.Conference",
+                verbose_name="Conference Title",
+            ),
         ),
         migrations.AddField(
-            model_name='study',
-            name='presentor',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='authors', to=settings.AUTH_USER_MODEL, verbose_name='Presented by'),
+            model_name="study",
+            name="presentor",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="authors",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Presented by",
+            ),
         ),
         migrations.AlterUniqueTogether(
-            name='study',
-            unique_together=set([('title', 'conference')]),
+            name="study",
+            unique_together=set([("title", "conference")]),
         ),
     ]

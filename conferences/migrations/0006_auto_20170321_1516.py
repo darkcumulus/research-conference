@@ -11,57 +11,92 @@ from django.utils.timezone import utc
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('conferences', '0005_auto_20170321_1442'),
+        ("conferences", "0005_auto_20170321_1442"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Author',
+            name="Author",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True, db_index=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
-                ('firstname', models.CharField(max_length=30)),
-                ('middlename', models.CharField(blank=True, max_length=30)),
-                ('lastname', models.CharField(max_length=30)),
-                ('gender', models.CharField(choices=[('0', 'Unknown'), ('1', 'male'), ('2', 'female')], default=0, max_length=1)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True, db_index=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                ("firstname", models.CharField(max_length=30)),
+                ("middlename", models.CharField(blank=True, max_length=30)),
+                ("lastname", models.CharField(max_length=30)),
+                (
+                    "gender",
+                    models.CharField(
+                        choices=[("0", "Unknown"), ("1", "male"), ("2", "female")],
+                        default=0,
+                        max_length=1,
+                    ),
+                ),
             ],
             options={
-                'ordering': ('lastname',),
+                "ordering": ("lastname",),
             },
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='abstract_deadline',
-            field=models.DateField(default=datetime.datetime(2017, 4, 5, 7, 16, 23, 713663, tzinfo=utc), verbose_name='Deadline of Abstract Submission'),
+            model_name="conference",
+            name="abstract_deadline",
+            field=models.DateField(
+                default=datetime.datetime(2017, 4, 5, 7, 16, 23, 713663, tzinfo=utc),
+                verbose_name="Deadline of Abstract Submission",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='end_date',
-            field=models.DateField(default=datetime.datetime(2017, 4, 22, 7, 16, 23, 713663, tzinfo=utc), verbose_name='Date Ended'),
+            model_name="conference",
+            name="end_date",
+            field=models.DateField(
+                default=datetime.datetime(2017, 4, 22, 7, 16, 23, 713663, tzinfo=utc),
+                verbose_name="Date Ended",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='paper_deadline',
-            field=models.DateField(default=datetime.datetime(2017, 4, 10, 7, 16, 23, 713663, tzinfo=utc), verbose_name='Deadline of Paper Submission'),
+            model_name="conference",
+            name="paper_deadline",
+            field=models.DateField(
+                default=datetime.datetime(2017, 4, 10, 7, 16, 23, 713663, tzinfo=utc),
+                verbose_name="Deadline of Paper Submission",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='start_date',
-            field=models.DateField(default=datetime.datetime(2017, 4, 20, 7, 16, 23, 713663, tzinfo=utc), verbose_name='Date Started'),
+            model_name="conference",
+            name="start_date",
+            field=models.DateField(
+                default=datetime.datetime(2017, 4, 20, 7, 16, 23, 713663, tzinfo=utc),
+                verbose_name="Date Started",
+            ),
         ),
         migrations.AlterField(
-            model_name='study',
-            name='authors',
-            field=models.ManyToManyField(to='conferences.Author', verbose_name='List of authors'),
+            model_name="study",
+            name="authors",
+            field=models.ManyToManyField(
+                to="conferences.Author", verbose_name="List of authors"
+            ),
         ),
         migrations.AlterField(
-            model_name='study',
-            name='presentor',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='authors', to='conferences.Author', verbose_name='Presented by'),
+            model_name="study",
+            name="presentor",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="authors",
+                to="conferences.Author",
+                verbose_name="Presented by",
+            ),
         ),
         migrations.AlterUniqueTogether(
-            name='author',
-            unique_together=set([('firstname', 'middlename', 'lastname')]),
+            name="author",
+            unique_together=set([("firstname", "middlename", "lastname")]),
         ),
     ]

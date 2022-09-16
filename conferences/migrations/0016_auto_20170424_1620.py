@@ -10,33 +10,50 @@ from django.utils.timezone import utc
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('conferences', '0015_auto_20170403_1607'),
+        ("conferences", "0015_auto_20170403_1607"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='conference',
-            name='abstract_deadline',
-            field=models.DateTimeField(blank=True, default=datetime.datetime(2017, 5, 9, 8, 20, 37, 330491, tzinfo=utc), verbose_name='Deadline of Abstract Submission'),
+            model_name="conference",
+            name="abstract_deadline",
+            field=models.DateTimeField(
+                blank=True,
+                default=datetime.datetime(2017, 5, 9, 8, 20, 37, 330491, tzinfo=utc),
+                verbose_name="Deadline of Abstract Submission",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='end_date',
-            field=models.DateField(default=datetime.datetime(2017, 5, 26, 8, 20, 37, 330491, tzinfo=utc), verbose_name='Date Ended'),
+            model_name="conference",
+            name="end_date",
+            field=models.DateField(
+                default=datetime.datetime(2017, 5, 26, 8, 20, 37, 330491, tzinfo=utc),
+                verbose_name="Date Ended",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='paper_deadline',
-            field=models.DateTimeField(blank=True, default=datetime.datetime(2017, 5, 14, 8, 20, 37, 330491, tzinfo=utc), verbose_name='Deadline of Paper Submission'),
+            model_name="conference",
+            name="paper_deadline",
+            field=models.DateTimeField(
+                blank=True,
+                default=datetime.datetime(2017, 5, 14, 8, 20, 37, 330491, tzinfo=utc),
+                verbose_name="Deadline of Paper Submission",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='poster_file_url',
-            field=models.URLField(blank=True, help_text='Put the URL of the PDF/DOCX Poster here (usually google drive URL)'),
+            model_name="conference",
+            name="poster_file_url",
+            field=models.URLField(
+                blank=True,
+                help_text="Put the URL of the PDF/DOCX Poster here (usually google drive URL)",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='start_date',
-            field=models.DateField(default=datetime.datetime(2017, 5, 24, 8, 20, 37, 330491, tzinfo=utc), verbose_name='Date Started'),
+            model_name="conference",
+            name="start_date",
+            field=models.DateField(
+                default=datetime.datetime(2017, 5, 24, 8, 20, 37, 330491, tzinfo=utc),
+                verbose_name="Date Started",
+            ),
         ),
     ]

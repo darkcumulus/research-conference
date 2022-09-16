@@ -13,56 +13,118 @@ import tagulous.models.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('conferences', '0016_auto_20170424_1620'),
+        ("conferences", "0016_auto_20170424_1620"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Keyword',
+            name="Keyword",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True)),
-                ('slug', models.SlugField()),
-                ('count', models.IntegerField(default=0, help_text='Internal counter of how many times this tag is in use')),
-                ('protected', models.BooleanField(default=False, help_text='Will not be deleted when the count reaches 0')),
-                ('path', models.TextField()),
-                ('label', models.CharField(help_text='The name of the tag, without ancestors', max_length=255)),
-                ('level', models.IntegerField(default=1, help_text='The level of the tag in the tree')),
-                ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='conferences.Keyword')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True)),
+                ("slug", models.SlugField()),
+                (
+                    "count",
+                    models.IntegerField(
+                        default=0,
+                        help_text="Internal counter of how many times this tag is in use",
+                    ),
+                ),
+                (
+                    "protected",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Will not be deleted when the count reaches 0",
+                    ),
+                ),
+                ("path", models.TextField()),
+                (
+                    "label",
+                    models.CharField(
+                        help_text="The name of the tag, without ancestors",
+                        max_length=255,
+                    ),
+                ),
+                (
+                    "level",
+                    models.IntegerField(
+                        default=1, help_text="The level of the tag in the tree"
+                    ),
+                ),
+                (
+                    "parent",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="children",
+                        to="conferences.Keyword",
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
-                'ordering': ('name',),
+                "abstract": False,
+                "ordering": ("name",),
             },
             bases=(tagulous.models.models.BaseTagTreeModel, models.Model),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='abstract_deadline',
-            field=models.DateTimeField(blank=True, default=datetime.datetime(2017, 5, 9, 8, 45, 8, 652756, tzinfo=utc), verbose_name='Deadline of Abstract Submission'),
+            model_name="conference",
+            name="abstract_deadline",
+            field=models.DateTimeField(
+                blank=True,
+                default=datetime.datetime(2017, 5, 9, 8, 45, 8, 652756, tzinfo=utc),
+                verbose_name="Deadline of Abstract Submission",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='end_date',
-            field=models.DateField(default=datetime.datetime(2017, 5, 26, 8, 45, 8, 652756, tzinfo=utc), verbose_name='Date Ended'),
+            model_name="conference",
+            name="end_date",
+            field=models.DateField(
+                default=datetime.datetime(2017, 5, 26, 8, 45, 8, 652756, tzinfo=utc),
+                verbose_name="Date Ended",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='paper_deadline',
-            field=models.DateTimeField(blank=True, default=datetime.datetime(2017, 5, 14, 8, 45, 8, 653756, tzinfo=utc), verbose_name='Deadline of Paper Submission'),
+            model_name="conference",
+            name="paper_deadline",
+            field=models.DateTimeField(
+                blank=True,
+                default=datetime.datetime(2017, 5, 14, 8, 45, 8, 653756, tzinfo=utc),
+                verbose_name="Deadline of Paper Submission",
+            ),
         ),
         migrations.AlterField(
-            model_name='conference',
-            name='start_date',
-            field=models.DateField(default=datetime.datetime(2017, 5, 24, 8, 45, 8, 652756, tzinfo=utc), verbose_name='Date Started'),
+            model_name="conference",
+            name="start_date",
+            field=models.DateField(
+                default=datetime.datetime(2017, 5, 24, 8, 45, 8, 652756, tzinfo=utc),
+                verbose_name="Date Started",
+            ),
         ),
         migrations.AddField(
-            model_name='conference',
-            name='keywords',
-            field=tagulous.models.fields.TagField(_set_tag_meta=True, autocomplete_view='conference_keywords_autocomplete', help_text='Enter keywords about the conference', initial='Community/Resilience, Community/Technology, Computers, Livelihood-Programs, Public/Speaking', space_delimiter=False, to='conferences.Keyword', tree=True),
+            model_name="conference",
+            name="keywords",
+            field=tagulous.models.fields.TagField(
+                _set_tag_meta=True,
+                autocomplete_view="conference_keywords_autocomplete",
+                help_text="Enter keywords about the conference",
+                initial="Community/Resilience, Community/Technology, Computers, Livelihood-Programs, Public/Speaking",
+                space_delimiter=False,
+                to="conferences.Keyword",
+                tree=True,
+            ),
         ),
         migrations.AlterUniqueTogether(
-            name='keyword',
-            unique_together=set([('slug', 'parent')]),
+            name="keyword",
+            unique_together=set([("slug", "parent")]),
         ),
     ]
