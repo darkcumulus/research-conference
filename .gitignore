@@ -21,3 +21,5 @@ env36/
 db.sqlite3
 tags
 .env
+staticfiles/
+media/
