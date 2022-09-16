@@ -2,72 +2,75 @@
 
 {% load staticfiles %}
 {% block rightside %}
-            <div class="tile is-parent is-9">
-                <div class="content">
-                    
-                        <div class="column is-12">
-                            <form method='GET' action=''>
-                                <div class="field has-addons">
-                                    <p class="control is-expanded">       
-                                        <input class="input" name='q' type="text" value="{{request.GET.q}}" placeholder="Find a conference">
-                                     
-                                    </p>
-                                    <p class="control">
-                                        <a class="button is-static is-dark">&nbsp; 
-                                          <i class="fa fa-search"></i>&nbsp; 
-                                        </a>                                           
-                                    </p>
-                                </div>
-                            </form>
-                        </div>
-                                   
-                    <br>
-                    <ul>
-                        {% for conference in conferences  %}
-                        <li>
-                            <div class="columns">
-                                <div class="column is-2">
-                                    <div class="image">
-                                        {% if conference.poster_image.url != None %}
-                                          <img src="{{conference.poster_image.url}}" alt="available photo">
-                                        {% else %}
-                                          <img src="{% static "images/photo_not_available.jpg" %}" alt="not available">
-                                        {% endif %}
-                                    </div>                                    
-                                </div>
-                                <div class="column is-10">
-                                    <div class="entry-body">
-                                        <p class="title is-5 ">
-                                        <a href="{% url 'conf:conference-list' %}{{conference.pk}}">{{conference.title}}</a>
-                                        </p>
-                                        <p class="subtitle is-6 is-marginless"><strong>Venue</strong>: {{conference.venue}}</p>
-                                        <p class="subtitle is-6 is-marginless"><strong>Event Date</strong>: {{conference.start_date}}-{{conference.end_date}}</p>
-                                        <p><strong>Description:</strong> {{conference.description| truncatewords:30}}
-                                        <p><small><i> Updated {{conference.updated}} </i></small></p></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    {% if is_paginated %}
-                    <nav id="pagination-setting" class="pagination">
-                        <span class="page-current is-pulled-left">
-                             Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}.
-                        </span>
-                        <span class="page-links">
-                            {% if page_obj.has_previous %}
-                                <a class="pagination-previous" href="/conferences?page={{ page_obj.previous_page_number }}">previous</a>
-                            {% endif %}
-                            {% if page_obj.has_next %}
-                                <a class="pagination-next" href="/conferences?page={{ page_obj.next_page_number }}">next</a>
-                            {% endif %}
+<div class="tile is-parent is-9">
+    <div class="content">
 
-                        </span>
+        <div class="column is-12">
+            <form method='GET' action=''>
+                <div class="field has-addons">
+                    <p class="control is-expanded">
+                        <input class="input" name='q' type="text" value="{{request.GET.q}}"
+                            placeholder="Find a conference">
 
-                    </nav>                   
-                    {% endif %}
+                    </p>
+                    <p class="control">
+                        <a class="button is-static is-dark">&nbsp;
+                            <i class="fa fa-search"></i>&nbsp;
+                        </a>
+                    </p>
                 </div>
-            </div>
+            </form>
+        </div>
+
+        <br>
+        <ul>
+            {% for conference in conferences %}
+            <li>
+                <div class="columns">
+                    <div class="column is-one-quarter">
+                        <div class="image">
+                            {% if conference.poster_image.url != None %}
+                            <img src="{{conference.poster_image.url}}" alt="available photo">
+                            {% else %}
+                            <img src="{% static " images/photo_not_available.jpg" %}" alt="not available">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="entry-body">
+                            <p class="title is-5 ">
+                                <a href="{% url 'conf:conference-list' %}{{conference.pk}}">{{conference.title}}</a>
+                            </p>
+                            <p class="subtitle is-6 is-marginless"><strong>Venue</strong>: {{conference.venue}}</p>
+                            <p class="subtitle is-6 is-marginless"><strong>Event Date</strong>:
+                                {{conference.start_date}}-{{conference.end_date}}</p>
+                            <p><strong>Description:</strong> {{conference.description| truncatewords:30}}
+                            <p><small><i> Updated {{conference.updated}} </i></small></p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </li>
+            {% endfor %}
+        </ul>
+        {% if is_paginated %}
+        <nav id="pagination-setting" class="pagination">
+            <span class="page-current is-pulled-left">
+                Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}.
+            </span>
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                <a class="pagination-previous" href="/conferences?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                {% if page_obj.has_next %}
+                <a class="pagination-next" href="/conferences?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+
+            </span>
+
+        </nav>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
