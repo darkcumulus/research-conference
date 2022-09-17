@@ -99,31 +99,19 @@
       <p class="sizeup">Related Conferences</p>
     </strong><br>
     <div class="columns">
+      {% for conference in similar_conferences %}
       <div class="column">
-        <figure class="image">
-          <img src="https://unsplash.it/800/600/?random">
+        <figure class="image is-16by9">
+          <img src="{{conference.poster_image.url}}">
         </figure>
-        <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
+        <p class="has-text-centered"><a
+            href="{% url 'conf:conference-list' %}{{conference.pk}}">{{conference.title}}</a></p>
       </div>
-      <div class="column">
-        <figure class="image">
-          <img src="https://unsplash.it/800/600/?random">
-        </figure>
-        <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
-      </div>
-      <div class="column">
-        <figure class="image">
-          <img src="https://unsplash.it/800/600/?random">
-        </figure>
-        <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
-      </div>
-      <div class="column">
-        <figure class="image">
-          <img src="https://unsplash.it/800/600/?random">
-        </figure>
-        <p class="has-text-centered"><a href="#">Lipsum dolor eit</a></p>
-      </div>
+      {% endfor %}
+
+      <!-- div.columns -->
     </div>
+
     <br>
     <p>
       <i class="fa fa-folder-open fa-1"></i>

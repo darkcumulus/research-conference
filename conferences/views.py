@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.http import Http404
 from django.urls import reverse
 from django import template
@@ -97,14 +97,24 @@ class ConferenceDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ConferenceDetail, self).get_context_data(**kwargs)
 
-        # import pdb; pdb.set_trace()
         url = context["conference"].poster_file_url
 
+        # import pdb; pdb.set_trace()
         context["object"].download_url = self.get_gdrive_poster_link(url)
         context["object"].cats = Category.objects.all()
 
         context["comment_form"] = CommentForm
         context["comments"] = context["conference"].comments.filter(active=True)
+
+        # get similar conferences
+        keyword_ids = context["conference"].keywords.values_list("id", flat=True)
+        similar_conferences = Conference.objects.filter(
+            keywords__in=keyword_ids
+        ).exclude(id=context["conference"].id)
+        similar_conferences = similar_conferences.annotate(
+            same_keywords=Count("keywords")
+        ).order_by("-same_keywords", "-start_date")[:4]
+        context["similar_conferences"] = similar_conferences
 
         return context
 
