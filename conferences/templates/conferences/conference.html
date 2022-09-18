@@ -107,6 +107,8 @@
         <p class="has-text-centered"><a
             href="{% url 'conf:conference-list' %}{{conference.pk}}">{{conference.title}}</a></p>
       </div>
+      {% empty %}
+      <p>There are no similar conference yet. </p>
       {% endfor %}
 
       <!-- div.columns -->
