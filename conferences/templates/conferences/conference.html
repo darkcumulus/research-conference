@@ -16,7 +16,7 @@
           {% if object.poster_image.url != None %}
           <img src="{{object.poster_image.url}}">
           {% else %}
-          <img src="{% static " images/photo_not_available.jpg" %}" alt="not available">
+          <img src="{% static 'images/photo_not_available.jpg' %}" alt="not available">
           {% endif %}
         </figure>
       </div>
@@ -153,7 +153,8 @@
     <article class="media">
       <figure class="media-left">
         <p class="image is-64x64">
-          <img src="https://epicattorneymarketing.com/wp-content/uploads/2016/07/Headshot-Placeholder-1.png">
+          <img src="{% static 'images/anon.png' %}
+">
         </p>
       </figure>
       <div class="media-content">
