@@ -39,7 +39,7 @@ class ConferenceList(ListView):
                 | Q(venue__icontains=query)
                 | Q(contact_details__icontains=query)
                 | Q(description__icontains=query)
-                | Q(keywords__slug__icontains=query)
+                # | Q(keywords__slug__icontains=query)
             ).order_by("-created")
         if self.kwargs and self.kwargs["slug"]:
             query = Conference.objects.filter(
