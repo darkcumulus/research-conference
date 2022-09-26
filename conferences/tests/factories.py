@@ -2,7 +2,7 @@ import factory
 import datetime
 import factory.fuzzy as fuzzy
 
-from .models import Organizer, Author, Category, Comment, Study
+from ..models import Organizer, Author, Category, Comment, Study
 
 
 class OrganizerFactory(factory.django.DjangoModelFactory):
