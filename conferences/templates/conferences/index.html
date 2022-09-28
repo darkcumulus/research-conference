@@ -6,7 +6,7 @@
     <div class="content">
 
         <div class="column is-12">
-            <form method='GET' action=''>
+            <form method='GET'>
                 <div class="field has-addons">
                     <p class="control is-expanded">
                         <input class="input" name='q' type="text" value="{{request.GET.q}}"
@@ -14,7 +14,7 @@
 
                     </p>
                     <p class="control">
-                        <a class="button is-static is-dark">&nbsp;
+                        <a href="{% url 'conf:conference-list' %}" class="button is-static is-dark">&nbsp;
                             <i class="fa fa-search"></i>&nbsp;
                         </a>
                     </p>
@@ -23,6 +23,7 @@
         </div>
 
         <br>
+        {% if conferences %}
         <ul>
             {% for conference in conferences %}
             <li>
@@ -54,6 +55,17 @@
             </li>
             {% endfor %}
         </ul>
+        {% else %}
+        <div class="modal is-active">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <h1 class="title is-1" style="color:white;text-align: center;">No Result Found</h1>
+            </div>
+            <button class="modal-close is-large"></button>
+        </div>
+
+        {% endif %}
+
         {% if is_paginated %}
         <nav id="pagination-setting" class="pagination">
             <span class="page-current is-pulled-left">

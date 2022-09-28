@@ -1,3 +1,5 @@
+from http.client import HTTPResponse
+from sqlite3 import IntegrityError
 from django.db import models
 from django.utils import timezone
 from consite.base import BaseProfile
@@ -7,7 +9,7 @@ from django.template.defaultfilters import slugify
 import datetime
 
 import tagulous.models
-
+from django.core.exceptions import FieldError
 
 class Organizer(BaseProfile):
     fullname = models.TextField(max_length=256, unique=True)
@@ -39,7 +41,10 @@ class Organizer(BaseProfile):
     def save(self, *args, **kwargs):
         if self.shortname is None:
             self.shortname = "".join(word[0] for word in self.shortname.upper().split())
-        super(Organizer, self).save(*args, **kwargs)
+        try:
+            return super(Organizer, self).save(*args, **kwargs)
+        except IntegrityError as e:
+            raise FieldError()
 
 
 class PendingManager(models.Manager):
