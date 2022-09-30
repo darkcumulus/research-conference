@@ -38,7 +38,7 @@ class Organizer(BaseProfile):
 
     def save(self, *args, **kwargs):
         if self.shortname is None:
-            self.shortname = "".join(word[0] for word in self.shortname.upper().split())
+            self.shortname = "".join(word[0] for word in self.fullname.upper().split())
         super(Organizer, self).save(*args, **kwargs)
 
 
