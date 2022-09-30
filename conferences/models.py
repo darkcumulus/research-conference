@@ -11,6 +11,7 @@ import datetime
 import tagulous.models
 from django.core.exceptions import FieldError
 
+
 class Organizer(BaseProfile):
     fullname = models.TextField(max_length=256, unique=True)
     shortname = models.CharField(max_length=10, blank=True, help_text="Shortname")

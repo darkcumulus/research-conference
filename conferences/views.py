@@ -34,7 +34,7 @@ class ConferenceList(ListView):
         query = self.request.GET.get("q")
         # import pdb; pdb.set_trace()
         if query:
-            result= Conference.objects.filter(
+            result = Conference.objects.filter(
                 Q(title__icontains=query)
                 | Q(venue__icontains=query)
                 | Q(contact_details__icontains=query)
