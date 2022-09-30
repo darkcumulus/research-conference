@@ -45,7 +45,7 @@ class Organizer(BaseProfile):
             raise ValidationError("fullname must not be empty or blank")
 
         if self.shortname is None:
-            self.shortname = "".join(word[0] for word in self.shortname.upper().split())
+            self.shortname = "".join(word[0] for word in self.fullname.upper().split())
         try:
             return super(Organizer, self).save(*args, **kwargs)
         except IntegrityError as e:
