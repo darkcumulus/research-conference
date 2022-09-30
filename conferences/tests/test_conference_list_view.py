@@ -38,3 +38,18 @@ class OrganizerDatabaseTest(TestCase):
             website="",
             contact="",
         )
+    
+    def test_organizer_shortname_is_generated_from_fullname_when_shortname_is_blank(self):
+        organizer = OrganizerFactory(
+            fullname="Every Good Boy Does Fine", shortname="", email="foo@gmail.com", website="", contact=""
+        )
+        another_organizer = OrganizerFactory(
+            fullname="Coolguys Of Palawan", shortname="cgop", email="foo@gmail.com", website="", contact=""
+        )
+        # test if blank
+        self.assertEquals(Organizer.objects.get(id=1), organizer)
+        self.assertEquals(organizer.shortname, "EGBDF")
+
+        # test if user provided explicit value
+        self.assertEquals(Organizer.objects.get(id=2), another_organizer)
+        self.assertEquals(another_organizer.shortname, "cgop")
