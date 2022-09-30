@@ -21,7 +21,7 @@ Made with bulma CSS library (not a designer sorry) thanks to the author!
 3. Clone this repository
    ```batch
    >git clone https://github.com/darkcumulus/research-conference
-   >cd Kumperensya
+   >cd research-conference
    ```
 4. Install dependencies
    ```batch

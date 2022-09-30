@@ -44,10 +44,10 @@ class ConferenceList(ListView):
         if self.kwargs and self.kwargs["slug"]:
             query = Conference.objects.filter(
                 categories__slug=self.kwargs["slug"]
-            ).order_by("-start_date")
+            ).order_by("-created")
             if query:
                 return query
-        return Conference.objects.all().order_by("-start_date")
+        return Conference.objects.all().order_by("-created")
 
     # uncomment below, if you want to modify, template data
 
@@ -91,6 +91,7 @@ class ConferenceDetail(DetailView):
                 new_comment.email = "noemail@gmail.com"
 
             new_comment.conference = self.get_object()
+            new_comment.active = True
             new_comment.save()
         return redirect(reverse("conf:conference-detail", args=(pk,)))
 
