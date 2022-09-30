@@ -1,6 +1,7 @@
 from http.client import HTTPResponse
 from sqlite3 import IntegrityError
 from django.db import models
+from django.forms import ValidationError
 from django.utils import timezone
 from consite.base import BaseProfile
 from django.contrib.auth.models import User
@@ -40,6 +41,9 @@ class Organizer(BaseProfile):
         return reverse("organizer-detail", kwargs={"pk", self.pk})
 
     def save(self, *args, **kwargs):
+        if self.fullname == "":
+            raise ValidationError("fullname must not be empty or blank")
+
         if self.shortname is None:
             self.shortname = "".join(word[0] for word in self.shortname.upper().split())
         try:
