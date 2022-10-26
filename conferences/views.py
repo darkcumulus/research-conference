@@ -91,7 +91,7 @@ class ConferenceDetail(DetailView):
                 new_comment.email = "noemail@gmail.com"
 
             new_comment.conference = self.get_object()
-            new_comment.active = True
+            #  new_comment.active = True
             new_comment.save()
         return redirect(reverse("conf:conference-detail", args=(pk,)))
 
