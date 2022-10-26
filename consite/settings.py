@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "conferences",
     "users",
     "tagulous",
+    "secret",
 ]
 # if DJANGO_MODE == "local":
 #     INSTALLED_APPS += [

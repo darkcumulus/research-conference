@@ -23,6 +23,7 @@ from django.views.generic import RedirectView, TemplateView
 
 from users import urls as user_urls
 from conferences import urls as conference_urls
+from secret import urls as secret_urls
 
 import tagulous.views
 from conferences import models
@@ -44,6 +45,7 @@ urlpatterns = [
         name="login",
     ),
     url(r"^conferences/", include(conference_urls, namespace="conf")),
+    url(r"^secret/", include(secret_urls, namespace="secret-page")),
     # url(r'^$', RedirectView.as_view(url='/conferences/'), name='home'),
     url(r"^$", TemplateView.as_view(template_name="index.html"), name="home"),
 ]
